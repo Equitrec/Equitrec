@@ -1,0 +1,40 @@
+.navbar {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	background-color: var(--primary-color);
+	color: var(--text-color);
+
+	.title {
+		padding-left: 20px;
+		font-size: 30px;
+	}
+
+	.item {
+		display: flex;
+		flex-direction: row;
+		font-size: 20px;
+
+		.element {
+			padding: 10px 20px;
+			transition: 200ms;
+
+			&:hover {
+				color: var(--text-hover-color);
+				transition: 200ms;
+				background-color: var(--primary-hover-color);
+			}
+		}
+	}
+
+	a {
+		text-decoration: none;
+		color: var(--text-color);
+		cursor: pointer;
+	}
+}
+
+main {
+	margin: 20px;
+}

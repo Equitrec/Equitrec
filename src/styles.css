@@ -1,3 +1,125 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+:root {
+	--primary-color: #00B86E;
+	--secondary-color: #76EF9E;
+	--accent-color: #6CD68F;
+
+	--primary-hover-color: #00A15C;
+	--secondary-hover-color: #6CD68F;
+	--accent-hover-color: #5CBF7A;
+
+	--background-color: #FAFCFB;
+	--text-color: #090D0A;
+
+	--background-hover-color: #E3FFC4;
+	--text-hover-color: #262e28;
+}
+
 * {
 	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+}
+
+body {
+	background-color: #e3ffc4;
+	color: var(--text-color);
+	user-select: none;
+}
+
+.tile {
+	background-color: var(--primary-color);
+	padding: 20px;
+	border-radius: 9px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	width: fit-content;
+}
+
+input {
+	background-color: var(--background-color);
+	border: 0;
+	border-radius: 9px;
+	padding: 8px 14px;
+	width: 100%;
+	box-sizing: border-box;
+	transition: 200ms;
+}
+
+button {
+	background-color: var(--secondary-color);
+	border: 0;
+	border-radius: 9px;
+	padding: 8px 14px;
+	cursor: pointer;
+	transition: 200ms;
+
+	&:hover {
+		background-color: var(--secondary-hover-color);
+	}
+}
+
+h2 {
+	font-size: 24px;
 }
