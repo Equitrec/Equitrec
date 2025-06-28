@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CallService } from './call.service';
+import { CallService } from '../utils/call.service';
 
 @Injectable({
 	providedIn: 'root'
@@ -21,6 +21,11 @@ export class UserService {
 			console.error(error);
 		});
 
+		return true;
+	}
+
+	checkToken(): boolean {
+		// TODO
 		return true;
 	}
 }

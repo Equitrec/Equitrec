@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { UserService } from '../user.service';
+import { UserService } from '../services/users/user.service';
 
 @Component({
 	selector: 'app-login',
@@ -10,5 +10,9 @@ import { UserService } from '../user.service';
 })
 
 export class LoginComponent {
-	constructor(public userService: UserService) { }
+	constructor(public userService: UserService) {
+		if (userService.checkToken()) {
+			window.location.href = '/';
+		}
+	}
 }

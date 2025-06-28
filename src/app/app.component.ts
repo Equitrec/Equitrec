@@ -1,11 +1,14 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
+import { UserService } from './services/users/user.service';
 
 @Component({
 	selector: 'app-root',
 	imports: [
 		RouterOutlet,
-		RouterModule
+		RouterModule,
+		NgIf
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.css'
@@ -13,4 +16,6 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 
 export class AppComponent {
 	title = 'Equitrec';
+
+	constructor(public userService: UserService) { }
 }

@@ -4,8 +4,9 @@
 	</div>
 
 	<div class="item">
-		<a class="element" routerLink="/">Accueil</a>
-		<a class="element" routerLink="/login">Connexion</a>
+		<a class="element" routerLink="/" *ngIf="userService.checkToken()">Accueil</a>
+		<a class="element" routerLink="/login" *ngIf="!userService.checkToken()">Connexion</a>
+		<a class="element" routerLink="/create" *ngIf="userService.checkToken()">Ajouter</a>
 	</div>
 </nav>
 
