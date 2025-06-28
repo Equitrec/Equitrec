@@ -11,26 +11,31 @@ export const routes: Routes = [
 	{
 		path: '',
 		component: HomeComponent,
-		canActivate: [GuardService]
+		canActivate: [GuardService],
+		title: 'Equitrec - Accueil'
 	},
 	{
 		path: 'login',
 		component: LoginComponent,
-		canActivate: [LoginGuardService]
+		canActivate: [LoginGuardService],
+		title: 'Equitrec - Connexion'
 	},
 	{
 		path: 'users/:id',
 		component: UsersComponent,
-		canActivate: [GuardService]
+		canActivate: [GuardService],
+		title: 'Equitrec - Utilisateur'
 	},
 	{
 		path: 'create',
 		component: CreateComponent,
-		canActivate: [GuardService]
+		canActivate: [GuardService],
+		title: 'Equitrec - Ajouter une compétition'
 	},
 	{
 		path: 'competition/:id',
 		component: CompetitionComponent,
-		canActivate: [GuardService]
+		canActivate: [GuardService],
+		title: 'Equitrec - Compétition'
 	}
 ];

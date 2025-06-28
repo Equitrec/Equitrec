@@ -1,6 +1,12 @@
-<div>
+<div class="competition_container">
 	<h1>Compétitions</h1>
-	<div *ngFor="let competition of competitonService.getCompetitions()">
-		<a class="element" [routerLink]="['/competition', competition.id]">{{ competition.name }}</a>
-	</div>
+	<a class="element" *ngFor="let competition of competitonService.getCompetitions()" [routerLink]="['/competition', competition.id]">
+		<div class="tile competition">
+			<h2>{{ competition.name }}</h2>
+			<p>Organisteur : </p>
+			<p>Participants : {{ competitonService.getUsers(competition.id).length }}</p>
+			<p>Date : </p>
+			<p>État : </p>
+		</div>
+	</a>
 </div>
