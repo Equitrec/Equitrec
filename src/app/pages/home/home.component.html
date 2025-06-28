@@ -1,5 +1,6 @@
-<p>home works!</p>
-
-<p>Competitions list :</p>
-
-<a class="element" routerLink="/competition">Compet1</a>
+<div>
+	<h1>Compétitions</h1>
+	<div *ngFor="let competition of competitonService.getCompetitions()">
+		<a class="element" [routerLink]="['/competition', competition.id]">{{ competition.name }}</a>
+	</div>
+</div>

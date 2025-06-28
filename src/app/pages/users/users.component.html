@@ -1,8 +1,8 @@
-<a class="element" routerLink="/competition">Retour</a>
+<a class="element" (click)="this.location.back()">Retour</a>
 
-<p>users works!</p>
+<h1>Utilisateur {{ this.userInfos.id }}</h1>
 
 <app-qrcode
-	[username]="this.username"
-	[password]="this.password"
+	[username]="this.userInfos.username"
+	[password]="this.userInfos.password"
 />

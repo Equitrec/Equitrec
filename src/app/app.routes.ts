@@ -19,7 +19,7 @@ export const routes: Routes = [
 		canActivate: [LoginGuardService]
 	},
 	{
-		path: 'users',
+		path: 'users/:id',
 		component: UsersComponent,
 		canActivate: [GuardService]
 	},
@@ -29,7 +29,7 @@ export const routes: Routes = [
 		canActivate: [GuardService]
 	},
 	{
-		path: 'competition',
+		path: 'competition/:id',
 		component: CompetitionComponent,
 		canActivate: [GuardService]
 	}

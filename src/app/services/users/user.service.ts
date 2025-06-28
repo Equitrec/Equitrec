@@ -28,4 +28,14 @@ export class UserService {
 		// TODO
 		return true;
 	}
+
+	getInfos(id: number): any {
+		// TODO
+		return {
+			id: id,
+			username: "username",
+			password: "password",
+			role: 1
+		};
+	}
 }

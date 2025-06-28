@@ -3,24 +3,25 @@ import { QRCodeComponent } from 'angularx-qrcode';
 import { QRCodeOptions, QrcodeService } from '../../services/utils/qrcode.service';
 
 @Component({
-  selector: 'app-qrcode',
-  standalone: true,
-  imports: [QRCodeComponent],
-  template: `
-    <div>
-        <qrcode
-            [qrdata]="qrCodeConfig.data"
-            [width]="qrCodeConfig.width"
-            [errorCorrectionLevel]="qrCodeConfig.errorCorrectionLevel"
-            [margin]="qrCodeConfig.margin"
-            [scale]="qrCodeConfig.scale"
-            [colorDark]="qrCodeConfig.colorDark"
-            [colorLight]="qrCodeConfig.colorLight"
-            id="qrcode-element">
-        </qrcode>
-    </div>
-  `
+	selector: 'app-qrcode',
+	standalone: true,
+	imports: [QRCodeComponent],
+	template: `
+		<div>
+			<qrcode
+				[qrdata]="qrCodeConfig.data"
+				[width]="qrCodeConfig.width"
+				[errorCorrectionLevel]="qrCodeConfig.errorCorrectionLevel"
+				[margin]="qrCodeConfig.margin"
+				[scale]="qrCodeConfig.scale"
+				[colorDark]="qrCodeConfig.colorDark"
+				[colorLight]="qrCodeConfig.colorLight"
+				id="qrcode-element">
+			</qrcode>
+		</div>
+	`
 })
+
 export class QrcodeComponent {
 	qrCodeConfig: any;
 	@Input() options: QRCodeOptions = {

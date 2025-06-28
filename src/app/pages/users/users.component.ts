@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { QrcodeComponent } from '../../components/qrcode/qrcode.component';
+import { UserService } from '../../services/users/user.service';
+import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-users',
@@ -10,11 +12,13 @@ import { QrcodeComponent } from '../../components/qrcode/qrcode.component';
 })
 
 export class UsersComponent {
-	username: string = "";
-	password: string = "";
+	userInfos: any;
 
-	constructor() {
-		this.username = "username";
-		this.password = "password";
+	constructor(
+		private route: ActivatedRoute,
+		private userService: UserService,
+		public location: Location
+	) {
+		this.userInfos = userService.getInfos(Number(this.route.snapshot.paramMap.get('id')));
 	}
 }
