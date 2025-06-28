@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { UsersComponent } from './users/users.component';
-import { CreateComponent } from './create/create.component';
-import { CompetitionComponent } from './competition/competition.component';
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { UsersComponent } from './pages/users/users.component';
+import { CreateComponent } from './pages/create/create.component';
+import { CompetitionComponent } from './pages/competition/competition.component';
 import { GuardService } from './services/guards/guard.service';
 import { LoginGuardService } from './services/guards/loginguard.service';
 
