@@ -1,8 +1,10 @@
-<a class="element" (click)="this.location.back()">Retour</a>
+<a class="button" (click)="this.location.back()">Retour</a>
 
-<h1>Utilisateur {{ this.userInfos.id }}</h1>
+<div class="tile user_container">
+	<h1>Utilisateur {{ this.userInfos.id }}</h1>
 
-<app-qrcode
-	[username]="this.userInfos.username"
-	[password]="this.userInfos.password"
-/>
+	<app-qrcode
+		[username]="this.userInfos.username"
+		[password]="this.userInfos.password"
+	/>
+</div>

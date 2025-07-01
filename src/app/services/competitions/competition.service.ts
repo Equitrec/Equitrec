@@ -1,11 +1,44 @@
 import { Injectable } from '@angular/core';
 
+export interface Competition {
+	name: string,
+	dateStart: number,
+	dateEnd: number,
+	user: string,
+	status: number,
+	location: string
+}
+
 @Injectable({
 	providedIn: 'root'
 })
 
 export class CompetitionService {
+	competition: Competition[] = [];
+
+	name: string = "";
+	dateStart: number = 0;
+	dateEnd: number = 0;
+	user: string = "";
+	status: number = 0;
+	location: string = "";
+
 	constructor() { }
+
+	add() {
+		this.competition.push({
+			name: this.name,
+			dateStart: this.dateStart,
+			dateEnd: this.dateEnd,
+			user: this.user,
+			status: this.status,
+			location: this.location
+		});
+
+		console.log("Competition added:", this.competition);
+
+		return true;
+	}
 
 	getCompetitions(): any[] {
 		// TODO

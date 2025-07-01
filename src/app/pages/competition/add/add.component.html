@@ -1,0 +1,9 @@
+<div class="tile add_container">
+	<h1>Créer une compétition</h1>
+
+	<input type="text" [(ngModel)]="this.competionService.name" placeholder="Nom de la compétition" />
+	<input type="datetime-local" [(ngModel)]="this.competionService.dateStart" placeholder="Date de début" />
+	<input type="datetime-local" [(ngModel)]="this.competionService.dateEnd" placeholder="Date de fin" />
+	<input type="text" [(ngModel)]="this.competionService.location" placeholder="Lieu de la compétition" />
+	<button (click)="this.competionService.add()">Créer la compétition</button>
+</div>

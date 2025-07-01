@@ -3,8 +3,12 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
-	background-color: var(--primary-color);
+	background-color: var(--background-color);
 	color: var(--text-color);
+	border: solid 2px var(--primary-color);
+	border-radius: 9px;
+	margin: 10px;
+	padding: 5px 20px;
 
 	.title {
 		padding-left: 20px;
@@ -19,11 +23,12 @@
 		.element {
 			padding: 10px 20px;
 			transition: 200ms;
+			border-radius: 9px;
 
 			&:hover {
 				color: var(--text-hover-color);
 				transition: 200ms;
-				background-color: var(--primary-hover-color);
+				background-color: var(--accent-hover-color);
 			}
 		}
 	}

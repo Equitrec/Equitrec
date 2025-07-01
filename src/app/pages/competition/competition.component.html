@@ -1,10 +1,10 @@
-<a class="element" (click)="this.location.back()">Retour</a>
+<a class="button" (click)="this.location.back()">Retour</a>
 
 <h1>Compétition {{ this.competitionId }}</h1>
 <div>
 	<p>Utilisateurs :</p>
 	<div *ngFor="let user of competitonService.getUsers(this.competitionId)">
-		<a class="element" [routerLink]="['/users', userService.getInfos(user).id]">{{ userService.getInfos(user).username }}</a>
+		<a class="button" [routerLink]="['/users', userService.getInfos(user).id]">{{ userService.getInfos(user).username }}</a>
 		<p>{{ userService.getInfos(user).role }}</p>
 	</div>
 </div>
