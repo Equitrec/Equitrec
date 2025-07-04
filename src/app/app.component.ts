@@ -15,7 +15,8 @@ import { UserService } from './services/users/user.service';
 })
 
 export class AppComponent {
-	title = 'Equitrec';
+	title = "Equitrec";
+	subtitle = "La notation tel que vous ne l'avez jamais vue !";
 
 	constructor(public userService: UserService) { }
 }

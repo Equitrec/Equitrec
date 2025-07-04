@@ -1,5 +1,8 @@
 <div class="competition_container">
-	<h1>Compétitions</h1>
+	<tile-competition *ngFor="let competition of competitonService.getCompetitions()"
+		[competition]="competition"
+	></tile-competition>
+	<!-- <h1>Compétitions</h1>
 	<a *ngFor="let competition of competitonService.getCompetitions()" [routerLink]="['/competition', competition.id]">
 		<div class="tile competition">
 			<h2>{{ competition.name }}</h2>
@@ -8,5 +11,5 @@
 			<p>Date : </p>
 			<p>État : </p>
 		</div>
-	</a>
+	</a> -->
 </div>

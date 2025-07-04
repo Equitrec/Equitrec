@@ -6,8 +6,26 @@ import { QRCodeOptions, QrcodeService } from '../../services/utils/qrcode.servic
 	selector: 'app-qrcode',
 	standalone: true,
 	imports: [QRCodeComponent],
+	styles: `
+		.qrcode_container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			img {
+				background-color: white;
+				width: 50px;
+				height: 50px;
+				border-radius: 50%;
+				padding: 5px;
+				border: solid 2px #000032;
+				position: absolute;
+			}
+		}
+	`,
 	template: `
-		<div>
+		<div class="qrcode_container">
+			<img src="equitrec.png" class="logo" />
 			<qrcode
 				[qrdata]="qrCodeConfig.data"
 				[width]="qrCodeConfig.width"
@@ -25,7 +43,7 @@ import { QRCodeOptions, QrcodeService } from '../../services/utils/qrcode.servic
 export class QrcodeComponent {
 	qrCodeConfig: any;
 	@Input() options: QRCodeOptions = {
-		colorDark: '#00b86e',
+		colorDark: '#000032',
 		colorLight: '#ffffff',
 		errorCorrectionLevel: 'H',
 		margin: 1.5,
@@ -43,6 +61,6 @@ export class QrcodeComponent {
 	}
 
 	generateQRCode() {
-		this.qrCodeConfig = this.qrcodeService.generateQRCodeConfig(`${this.username}|${this.password}`, this.options);
+		this.qrCodeConfig = this.qrcodeService.generateQRCodeConfig(`{"username": "${this.username}", "password": "${this.password}"}`, this.options);
 	}
 }
