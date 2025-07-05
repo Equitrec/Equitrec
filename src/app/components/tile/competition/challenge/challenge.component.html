@@ -1,0 +1,18 @@
+<div class="tile user_tile">
+	<div class="content">
+		<label>Nom</label>
+		<p>{{ challenge.name }}</p>
+	</div>
+	<div class="content">
+		<label>Description</label>
+		<p>{{ challenge.description }}</p>
+	</div>
+	<div class="content">
+		<label>Outils</label>
+		<p>
+			<span *ngFor="let tool of challenge.tools; let last = last">
+				{{ tool | titlecase }}<span *ngIf="!last">, </span>
+			</span>
+		</p>
+	</div>
+</div>

@@ -12,5 +12,5 @@ import { CompetitionComponent } from '../../components/tile/competition/competit
 })
 
 export class HomeComponent {
-	constructor(public competitonService: CompetitionService) { }
+	constructor(public competitionService: CompetitionService) { }
 }

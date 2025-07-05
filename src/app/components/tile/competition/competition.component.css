@@ -16,20 +16,44 @@
 	h1 {
 		position: absolute;
 		top: 0;
-		transform: translateY(16px);
 		color: #fff;
+		font-size: 22px;
+		text-align: center;
+		display: flex;
+		height: 60px;
+		align-items: center;
+		padding: 0px 10px;
 	}
 
 	.title_blur_container {
 		border-radius: 10px 10px 0 0;
-		background-color: rgba(255, 255, 255, 0);
+		background-color: #000c4442;
 		backdrop-filter: blur(2px);
 		width: inherit;
 		height: 60px;
 		position: absolute;
 	}
 
-	.content {
+	.content_container {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 14px;
+		height: 100%;
+		padding: 20px;
 
+		.content {
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+
+			label {
+				font-size: 16px;
+				opacity: 70%;
+			}
+
+			p {
+				font-size: 18px;
+			}
+		}
 	}
 }

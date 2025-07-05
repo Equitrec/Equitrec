@@ -1,10 +1,27 @@
-<a class="button" (click)="this.location.back()">Retour</a>
+<a class="button back_button" (click)="this.location.back()"><i class="ri-arrow-go-back-line"></i> Retour</a>
 
-<h1>Compétition {{ this.competitionId }}</h1>
-<div>
-	<p>Utilisateurs :</p>
-	<div *ngFor="let user of competitonService.getUsers(this.competitionId)">
-		<a class="button" [routerLink]="['/users', userService.getInfos(user).id]">{{ userService.getInfos(user).username }}</a>
-		<p>{{ userService.getInfos(user).role }}</p>
+<div class="competition_container">
+	<tile-competition
+		[competition]="competitonService.getInfos(this.competitionId)"
+	></tile-competition>
+
+	<div class="competition_details">
+		<h1>Utilisateurs</h1>
+		<div class="users">
+			<a *ngFor="let user of competitonService.getUsers(this.competitionId)" [routerLink]="['/users', userService.getInfos(user).id]">
+				<tile-user
+					[user]="userService.getInfos(user)"
+				></tile-user>
+			</a>
+		</div>
+
+		<h1>Epreuves</h1>
+		<div class="challenges">
+			<div *ngFor="let challenge of competitonService.getInfos(this.competitionId).challenges">
+				<tile-challenge
+					[challenge]="challengeService.getInfos(challenge)"
+				></tile-challenge>
+			</div>
+		</div>
 	</div>
 </div>

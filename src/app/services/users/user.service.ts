@@ -31,11 +31,68 @@ export class UserService {
 
 	getInfos(id: number): any {
 		// TODO
-		return {
-			id: id,
-			username: "username",
-			password: "password",
-			role: 1
+		const users = [
+			{
+				id: 1,
+				username: 'jules.dupont',
+				password: 'password',
+				role: 2
+			},
+			{
+				id: 2,
+				username: 'juliette.auberville',
+				password: 'password1243',
+				role: 2
+			},
+			{
+				id: 3,
+				username: 'jerome.belier',
+				password: 'password',
+				role: 2
+			},
+			{
+				id: 4,
+				username: 'marie.leroux',
+				password: 'password123',
+				role: 1
+			},
+			{
+				id: 5,
+				username: 'antoine.martin',
+				password: 'securepass',
+				role: 1
+			},
+			{
+				id: 6,
+				username: 'camille.durand',
+				password: 'mypassword',
+				role: 1
+			},
+			{
+				id: 7,
+				username: 'lucas.moireau',
+				password: 'passw0rd',
+				role: 1
+			},
+			{
+				id: 8,
+				username: 'sophie.bernard',
+				password: 's0phie123',
+				role: 1
+			},
+			{
+				id: 9,
+				username: 'paul.leclerc',
+				password: 'paulpass',
+				role: 1
+			}
+		];
+
+		return users.find(user => user.id === id) || {
+			id: 0,
+			username: "Utilisateur inconnu",
+			password: "Aucun mot de passe disponible",
+			role: 0
 		};
 	}
 }

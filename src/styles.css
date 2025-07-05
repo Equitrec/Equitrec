@@ -110,7 +110,7 @@ input {
 
 button,
 .button {
-	background-color: var(--secondary-color);
+	background-color: #fff;
 	border: 0;
 	border-radius: 9px;
 	padding: 8px 14px;
@@ -118,8 +118,17 @@ button,
 	transition: 200ms;
 
 	&:hover {
-		background-color: var(--secondary-hover-color);
+		background-color: #ececec;
+		transition: 200ms;
 	}
+}
+
+.back_button {
+	box-shadow: #b9b9b9 0 3px 10px;
+    position: absolute;
+	top: 293px;
+	left: 10%;
+    z-index: 10;
 }
 
 h1 {

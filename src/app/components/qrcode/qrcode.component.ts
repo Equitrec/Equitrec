@@ -18,7 +18,7 @@ import { QRCodeOptions, QrcodeService } from '../../services/utils/qrcode.servic
 				height: 50px;
 				border-radius: 50%;
 				padding: 5px;
-				border: solid 2px #000032;
+				border: solid 3px #000032;
 				position: absolute;
 			}
 		}

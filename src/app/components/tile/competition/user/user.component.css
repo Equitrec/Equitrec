@@ -1,0 +1,22 @@
+.user_tile {
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 14px;
+	width: 300px;
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		label {
+			font-size: 16px;
+			opacity: 70%;
+		}
+
+		p {
+			font-size: 18px;
+		}
+	}
+}

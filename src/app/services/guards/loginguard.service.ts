@@ -11,10 +11,10 @@ export class LoginGuardService implements CanActivate {
 
 	canActivate(): boolean {
 		if (this.userService.checkToken()) {
-			return false;
-		} else {
 			this.router.navigate(['/']);
 
+			return false;
+		} else {
 			return true;
 		}
 	}

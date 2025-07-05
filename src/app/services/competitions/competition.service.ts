@@ -42,14 +42,21 @@ export class CompetitionService {
 
 	getCompetitions(): any[] {
 		// TODO
-		return [
+		return [1, 2, 3];
+	}
+
+	getInfos(id: number): any {
+		// TODO
+		const compet = [
 			{
 				id: 1,
-				name: 'Competition 1',
+				name: 'VoltigeChampionats de france amateur',
 				description: 'Description for Competition 1',
-				startDate: new Date('2025-01-01'),
-				endDate: new Date('2025-01-31'),
+				organizer: 1,
+				startDate: new Date('2025-01-01 00:00:00'),
+				endDate: new Date('2025-01-31 23:59:59'),
 				status: 'active',
+				location: 'Boulerie master',
 				challenges: [
 					1,
 					7,
@@ -58,11 +65,13 @@ export class CompetitionService {
 			},
 			{
 				id: 2,
-				name: 'Competition 2',
+				name: 'Boulerie master dressage',
 				description: 'Description for Competition 2',
-				startDate: new Date('2025-02-01'),
-				endDate: new Date('2025-02-28'),
+				organizer: 3,
+				startDate: new Date('2025-02-01 00:00:00'),
+				endDate: new Date('2025-02-28 23:59:59'),
 				status: 'inactive',
+				location: 'Zoom master - Grand Théâtre',
 				challenges: [
 					2,
 					3,
@@ -72,20 +81,49 @@ export class CompetitionService {
 			},
 			{
 				id: 3,
-				name: 'Competition 3',
+				name: 'Dressage boulerie festival & finales france dressage',
 				description: 'Description for Competition 3',
-				startDate: new Date('2025-03-01'),
-				endDate: new Date('2025-03-31'),
-				status: 'active',
+				organizer: 2,
+				startDate: new Date('2025-03-01 00:00:00'),
+				endDate: new Date('2025-03-31 23:59:59'),
+				status: 'progress',
+				location: 'Angers',
 				challenges: [
 					6
 				]
 			}
-		];
+		]
+
+		return compet.find(c => c.id === id) || {
+			id: 0,
+			name: "Unknown Competition",
+			description: "No description available",
+			organizer: 0,
+			startDate: new Date(),
+			endDate: new Date(),
+			status: "unknown",
+			location: "unknown",
+			challenges: []
+		};
 	}
 
 	getUsers(id: number): any[] {
 		// TODO
-		return [1, 2, 3];
+		const users = [
+			{
+				id: 1,
+				users: [4, 5]
+			},
+			{
+				id: 2,
+				users: [4, 8, 9]
+			},
+			{
+				id: 3,
+				users: [6, 4]
+			}
+		]
+
+		return users.find(c => c.id === id)?.users || [];
 	}
 }
