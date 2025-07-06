@@ -1,11 +1,16 @@
 <div class="tile user_tile">
-	<i *ngIf="user.role === 2" class="ri-external-link-line"></i>
+	<i *ngIf="this.user.role === 2" class="ri-external-link-line"></i>
 	<div class="content">
 		<label>Utilisateur</label>
-		<p>{{ user.username }}</p>
+		<p>{{ this.user.username }}</p>
 	</div>
 	<div class="content">
 		<label>Role</label>
-		<p>{{ formatService.formatRole(user.role) }}</p>
+		<p>{{ formatService.formatRole(+this.user.role) }}</p>
+	</div>
+
+	<div class="action_button_container">
+		<a class="action_button" [routerLink]="['/edit/user', this.user.id]"><i class="ri-pencil-line"></i></a>
+		<a class="action_button" (click)="this.userService.delete(this.user.id)"><i class="ri-delete-bin-line"></i></a>
 	</div>
 </div>

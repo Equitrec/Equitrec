@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { CompetitionService } from '../../../../services/competitions/competition.service';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
 	selector: 'app-create-competition',
 	imports: [FormsModule, RouterModule],
-	templateUrl: './add.competition.component.html',
-	styleUrl: './add.competition.component.css'
+	templateUrl: './add.competition.component.html'
 })
 
 export class AddCompetitionComponent {
@@ -16,9 +15,11 @@ export class AddCompetitionComponent {
 
 	constructor(
 		public competionService: CompetitionService,
-		private route: ActivatedRoute,
 		public location: Location
 	) {
-		this.competitionId = Number(this.route.snapshot.paramMap.get('id'));
+		this.competionService.name = '';
+		this.competionService.dateStart = 0;
+		this.competionService.dateEnd = 0;
+		this.competionService.location = '';
 	}
 }

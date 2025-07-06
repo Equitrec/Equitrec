@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { FormatService } from '../../../../services/utils/format.service';
 import { NgIf } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { UserService } from '../../../../services/users/user.service';
 
 @Component({
 	selector: 'tile-user',
-	imports: [NgIf],
+	imports: [NgIf, RouterModule],
 	templateUrl: './user.component.html',
 	styleUrl: './user.component.css'
 })
@@ -12,5 +14,5 @@ import { NgIf } from '@angular/common';
 export class UserComponent {
 	@Input() user: any;
 
-	constructor(public formatService: FormatService) { }
+	constructor(public formatService: FormatService, public userService: UserService) { }
 }

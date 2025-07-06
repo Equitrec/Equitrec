@@ -19,6 +19,69 @@ export class UserService {
 	token: string = "";
 	role: number = 0;
 
+	users = [
+		{
+			id: 1,
+			username: 'jules.dupont',
+			password: 'password',
+			role: 2
+		},
+		{
+			id: 2,
+			username: 'juliette.auberville',
+			password: 'password1243',
+			role: 2
+		},
+		{
+			id: 3,
+			username: 'jerome.belier',
+			password: 'password',
+			role: 2
+		},
+		{
+			id: 4,
+			username: 'marie.leroux',
+			password: 'password123',
+			role: 1
+		},
+		{
+			id: 5,
+			username: 'antoine.martin',
+			password: 'securepass',
+			role: 1
+		},
+		{
+			id: 6,
+			username: 'camille.durand',
+			password: 'mypassword',
+			role: 1
+		},
+		{
+			id: 7,
+			username: 'lucas.moireau',
+			password: 'passw0rd',
+			role: 1
+		},
+		{
+			id: 8,
+			username: 'sophie.bernard',
+			password: 's0phie123',
+			role: 1
+		},
+		{
+			id: 9,
+			username: 'paul.leclerc',
+			password: 'paulpass',
+			role: 1
+		},
+		{
+			id: 11,
+			username: 'admin',
+			password: 'adminpass',
+			role: 10
+		}
+	];
+
 	constructor(private call: CallService, public router: Router) { }
 
 	add(competitionId: number): boolean {
@@ -32,7 +95,27 @@ export class UserService {
 		this.router.navigate(['/competition', competitionId]);
 
 		return true;
+	}
 
+	delete(id: number): boolean {
+		this.users = this.users.filter(u => u.id !== id);
+
+		console.log("User deleted:", id);
+
+		return true;
+	}
+
+	update(id: number): boolean {
+		const index = this.users.findIndex(u => u.id === id);
+
+		this.users[index].username = this.username;
+		this.users[index].role = this.role;
+
+		console.log("User updated:", this.users[index]);
+
+		this.router.navigate(["/competition"]);
+
+		return true;
 	}
 
 	login(): boolean {
@@ -54,70 +137,7 @@ export class UserService {
 
 	getInfos(id: number): any {
 		// TODO
-		const users = [
-			{
-				id: 1,
-				username: 'jules.dupont',
-				password: 'password',
-				role: 2
-			},
-			{
-				id: 2,
-				username: 'juliette.auberville',
-				password: 'password1243',
-				role: 2
-			},
-			{
-				id: 3,
-				username: 'jerome.belier',
-				password: 'password',
-				role: 2
-			},
-			{
-				id: 4,
-				username: 'marie.leroux',
-				password: 'password123',
-				role: 1
-			},
-			{
-				id: 5,
-				username: 'antoine.martin',
-				password: 'securepass',
-				role: 1
-			},
-			{
-				id: 6,
-				username: 'camille.durand',
-				password: 'mypassword',
-				role: 1
-			},
-			{
-				id: 7,
-				username: 'lucas.moireau',
-				password: 'passw0rd',
-				role: 1
-			},
-			{
-				id: 8,
-				username: 'sophie.bernard',
-				password: 's0phie123',
-				role: 1
-			},
-			{
-				id: 9,
-				username: 'paul.leclerc',
-				password: 'paulpass',
-				role: 1
-			},
-			{
-				id: 11,
-				username: 'admin',
-				password: 'adminpass',
-				role: 10
-			}
-		];
-
-		return users.find(user => user.id === id) || {
+		return this.users.find(user => user.id === id) || {
 			id: 0,
 			username: "Utilisateur inconnu",
 			password: "Aucun mot de passe disponible",

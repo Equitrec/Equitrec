@@ -1,0 +1,36 @@
+<div class="tile competition_container">
+	<div class="title_blur_container"></div>
+	<img src="competition.png"/>
+	<h1>{{ this.competition.name }}</h1>
+
+	<div class="content_container">
+		<div class="content">
+			<label>Organisateur</label>
+			<p>{{ userService.getInfos(this.competition.organizer).username }}</p>
+		</div>
+		<div class="content">
+			<label>Participants</label>
+			<p>{{ competitonService.getUsers(competition.id).length }}</p>
+		</div>
+		<div class="content">
+			<label>Début</label>
+			<p>{{ this.competition.dateStart | date:'dd/MM/yyyy HH:mm' }}</p>
+		</div>
+		<div class="content">
+			<label>Fin</label>
+			<p>{{ this.competition.dateEnd | date:'dd/MM/yyyy HH:mm'  }}</p>
+		</div>
+		<div class="content">
+			<label>État</label>
+			<p>{{ this.competition.status }}</p>
+		</div>
+		<div class="content">
+			<label>Lieu</label>
+			<p>{{ this.competition.location }}</p>
+		</div>
+	</div>
+	<div class="action_button_container">
+		<a class="action_button" [routerLink]="['/edit/competition', this.competition.id]"><i class="ri-pencil-line"></i></a>
+		<a class="action_button" (click)="this.competitonService.delete(this.competition.id);"><i class="ri-delete-bin-line"></i></a>
+	</div>
+</div>

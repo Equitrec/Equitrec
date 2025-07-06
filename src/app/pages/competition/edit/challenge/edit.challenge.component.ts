@@ -5,23 +5,25 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
-	selector: 'app-create-challenge',
+	selector: 'app-edit-challenge',
 	imports: [FormsModule, RouterModule],
-	templateUrl: './add.challenge.component.html'
+	templateUrl: './edit.challenge.component.html'
 })
 
-export class AddChallengeComponent {
-	competitionId: number = 0;
+export class EditChallengeComponent {
+	challengeId: number = 0;
 
 	constructor(
 		public challengeService: ChallengeService,
 		private route: ActivatedRoute,
 		public location: Location
 	) {
-		this.competitionId = Number(this.route.snapshot.paramMap.get('id'));
+		this.challengeId = Number(this.route.snapshot.paramMap.get('id'));
 
-		this.challengeService.name = '';
-		this.challengeService.description = '';
-		this.challengeService.tools = [];
+		let challengeInfo = this.challengeService.getInfos(this.challengeId);
+
+		this.challengeService.name = challengeInfo.name;
+		this.challengeService.description = challengeInfo.description;
+		this.challengeService.tools = challengeInfo.tools;
 	}
 }

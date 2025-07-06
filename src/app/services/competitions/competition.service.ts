@@ -24,6 +24,54 @@ export class CompetitionService {
 	status: number = 0;
 	location: string = "";
 
+	compet = [
+		{
+			id: 1,
+			name: 'VoltigeChampionats de france amateur',
+			description: 'Description for Competition 1',
+			organizer: 1,
+			dateStart: new Date('2025-01-01 00:00:00'),
+			dateEnd: new Date('2025-01-31 23:59:59'),
+			status: 'active',
+			location: 'Boulerie master',
+			challenges: [
+				1,
+				5,
+				3
+			]
+		},
+		{
+			id: 2,
+			name: 'Boulerie master dressage',
+			description: 'Description for Competition 2',
+			organizer: 3,
+			dateStart: new Date('2025-02-01 00:00:00'),
+			dateEnd: new Date('2025-02-28 23:59:59'),
+			status: 'inactive',
+			location: 'Zoom master - Grand Théâtre',
+			challenges: [
+				2,
+				3,
+				4,
+				5,
+				1
+			]
+		},
+		{
+			id: 3,
+			name: 'Dressage boulerie festival & finales france dressage',
+			description: 'Description for Competition 3',
+			organizer: 2,
+			dateStart: new Date('2025-03-01 00:00:00'),
+			dateEnd: new Date('2025-03-31 23:59:59'),
+			status: 'progress',
+			location: 'Angers',
+			challenges: [
+				3
+			]
+		}
+	]
+
 	constructor(public router: Router) { }
 
 	add(): boolean {
@@ -43,67 +91,43 @@ export class CompetitionService {
 		return true;
 	}
 
+	delete(id: number): boolean {
+		this.compet = this.compet.filter(c => c.id !== id);
+
+		console.log("Competition deleted:", id);
+
+		return true;
+	}
+
+	update(id: number): boolean {
+		const index = this.compet.findIndex(c => c.id === id);
+
+		this.compet[index].name = this.name;
+		this.compet[index].dateStart = new Date(this.dateStart);
+		this.compet[index].dateEnd = new Date(this.dateEnd);
+		this.compet[index].location = this.location;
+
+		console.log("Competition updated:", this.compet[index]);
+
+		this.router.navigate(["/"]);
+
+		return true;
+	}
+
 	getCompetitions(): any[] {
 		// TODO
-		return [1, 2, 3];
+		return this.compet.map(c => c.id);
 	}
 
 	getInfos(id: number): any {
 		// TODO
-		const compet = [
-			{
-				id: 1,
-				name: 'VoltigeChampionats de france amateur',
-				description: 'Description for Competition 1',
-				organizer: 1,
-				startDate: new Date('2025-01-01 00:00:00'),
-				endDate: new Date('2025-01-31 23:59:59'),
-				status: 'active',
-				location: 'Boulerie master',
-				challenges: [
-					1,
-					7,
-					32
-				]
-			},
-			{
-				id: 2,
-				name: 'Boulerie master dressage',
-				description: 'Description for Competition 2',
-				organizer: 3,
-				startDate: new Date('2025-02-01 00:00:00'),
-				endDate: new Date('2025-02-28 23:59:59'),
-				status: 'inactive',
-				location: 'Zoom master - Grand Théâtre',
-				challenges: [
-					2,
-					3,
-					4,
-					5
-				]
-			},
-			{
-				id: 3,
-				name: 'Dressage boulerie festival & finales france dressage',
-				description: 'Description for Competition 3',
-				organizer: 2,
-				startDate: new Date('2025-03-01 00:00:00'),
-				endDate: new Date('2025-03-31 23:59:59'),
-				status: 'progress',
-				location: 'Angers',
-				challenges: [
-					6
-				]
-			}
-		]
-
-		return compet.find(c => c.id === id) || {
+		return this.compet.find(c => c.id === id) || {
 			id: 0,
 			name: "Unknown Competition",
 			description: "No description available",
 			organizer: 0,
-			startDate: new Date(),
-			endDate: new Date(),
+			dateStart: new Date(),
+			dateEnd: new Date(),
 			status: "unknown",
 			location: "unknown",
 			challenges: []
@@ -119,7 +143,7 @@ export class CompetitionService {
 			},
 			{
 				id: 2,
-				users: [4, 3, 9]
+				users: [4, 3, 9, 8, 7, 1]
 			},
 			{
 				id: 3,

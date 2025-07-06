@@ -1,0 +1,13 @@
+<nav class="title_button_container">
+	<a class="button item" routerLink="/"><i class="ri-arrow-go-back-line"></i> Retour</a>
+</nav>
+
+<div class="tile form">
+	<h1>Modifier une épreuve</h1>
+
+	<input type="text" [(ngModel)]="this.challengeService.name" placeholder="Nom de la compétition" />
+	<textarea [(ngModel)]="this.challengeService.description" placeholder="Description de la compétition"></textarea>
+	<input type="text" [(ngModel)]="this.challengeService.tools" placeholder="Outils" />
+
+	<button (click)="this.challengeService.update(this.challengeId)">Modifier</button>
+</div>

@@ -17,3 +17,20 @@
 		}
 	}
 }
+
+@media screen and (max-width: 800px) {
+	.competition_container {
+		flex-direction: column;
+
+		.competition_details {
+			justify-content: center;
+			align-items: center;
+
+			.challenges,
+			.users {
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+}

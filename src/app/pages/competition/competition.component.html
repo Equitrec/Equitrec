@@ -12,11 +12,14 @@
 	<div class="competition_details">
 		<h1>Participants</h1>
 		<div class="users">
-			<a *ngFor="let user of competitonService.getUsers(this.competitionId)" [routerLink]="['/users', userService.getInfos(user).id]">
-				<tile-user
-					[user]="userService.getInfos(user)"
-				></tile-user>
-			</a>
+			<ng-container *ngFor="let user of competitonService.getUsers(this.competitionId)">
+				<a *ngIf="userService.getInfos(user).role == 2" [routerLink]="['/users', userService.getInfos(user).id]">
+					<tile-user [user]="userService.getInfos(user)"></tile-user>
+				</a>
+				<ng-container *ngIf="userService.getInfos(user).role != 2">
+					<tile-user [user]="userService.getInfos(user)"></tile-user>
+				</ng-container>
+			</ng-container>
 		</div>
 
 		<h1>Epreuves</h1>

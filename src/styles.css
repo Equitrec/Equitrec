@@ -134,6 +134,29 @@ button,
 	}
 }
 
+.action_button_container {
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+	display: flex;
+	gap: 12px;
+
+	.action_button {
+		background: 0;
+		border: 0;
+		transition: 200ms;
+
+		i {
+			font-size: 22px;
+			transition: 200ms;
+		}
+
+		&:hover {
+			color: var(--primary-color);
+		}
+	}
+}
+
 .title_button_container {
 	position: absolute;
 	top: 300px;
@@ -163,5 +186,9 @@ a {
 	&:hover {
 		color: var(--text-hover-color);
 		transition: 200ms;
+	}
+
+	label {
+		cursor: pointer;
 	}
 }
