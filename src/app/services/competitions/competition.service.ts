@@ -123,13 +123,13 @@ export class CompetitionService {
 		// TODO
 		return this.compet.find(c => c.id === id) || {
 			id: 0,
-			name: "Unknown Competition",
-			description: "No description available",
+			name: "Compétition inconnue",
+			description: "Aucune description disponible",
 			organizer: 0,
 			dateStart: new Date(),
 			dateEnd: new Date(),
-			status: "unknown",
-			location: "unknown",
+			status: "Inconnu",
+			location: "inconnu",
 			challenges: []
 		};
 	}

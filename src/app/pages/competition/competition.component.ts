@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CompetitionService } from '../../services/competitions/competition.service';
-import { Location, NgFor, NgIf } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { UserService } from '../../services/users/user.service';
 import { CompetitionComponent as CompetitionTileComponent } from "../../components/tile/competition/competition.component";
 import { UserComponent } from '../../components/tile/competition/user/user.component';
@@ -10,7 +10,7 @@ import { ChallengeService } from '../../services/competitions/challenge/challeng
 
 @Component({
 	selector: 'app-competition',
-	imports: [RouterModule, NgFor, NgIf, CompetitionTileComponent, UserComponent, ChallengeComponent],
+	imports: [RouterModule, CommonModule, CompetitionTileComponent, UserComponent, ChallengeComponent],
 	templateUrl: './competition.component.html',
 	styleUrl: './competition.component.css'
 })

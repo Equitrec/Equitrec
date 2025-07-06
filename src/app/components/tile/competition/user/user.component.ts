@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { FormatService } from '../../../../services/utils/format.service';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../../../services/users/user.service';
 
 @Component({
 	selector: 'tile-user',
-	imports: [NgIf, RouterModule],
+	imports: [RouterModule, CommonModule],
 	templateUrl: './user.component.html',
 	styleUrl: './user.component.css'
 })

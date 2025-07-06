@@ -113,7 +113,7 @@ export class UserService {
 
 		console.log("User updated:", this.users[index]);
 
-		this.router.navigate(["/competition"]);
+		this.router.navigate(["/"]);
 
 		return true;
 	}
@@ -122,7 +122,8 @@ export class UserService {
 		this.call.callApi("login", { username: this.username, password: this.password })
 		.subscribe(response => {
 			localStorage.setItem("token", response.data.token);
-			window.location.href = "/";
+
+			this.router.navigate(['/']);
 		}, error => {
 			console.error(error);
 		});

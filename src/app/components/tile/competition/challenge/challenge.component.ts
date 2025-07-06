@@ -1,11 +1,11 @@
-import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ChallengeService } from '../../../../services/competitions/challenge/challenge.service';
 
 @Component({
 	selector: 'tile-challenge',
-	imports: [NgFor, NgIf, CommonModule, RouterModule],
+	imports: [CommonModule, RouterModule],
 	templateUrl: './challenge.component.html',
 	styleUrl: './challenge.component.css'
 })

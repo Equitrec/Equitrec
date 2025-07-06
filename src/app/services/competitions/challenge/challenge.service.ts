@@ -95,8 +95,8 @@ export class ChallengeService {
 		// TODO
 		return this.challenges.find(challenge => challenge.id === id) || {
 			id: 0,
-			name: "Unknown Challenge",
-			description: "No description available",
+			name: "Challenge inconnu",
+			description: "Aucune description disponible",
 			tools: []
 		};
 	}
