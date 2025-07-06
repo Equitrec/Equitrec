@@ -1,11 +1,25 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+export interface Challenge {
+	name: string,
+	description: string,
+	tools: Array<string>
+	competitionId: number
+}
 
 @Injectable({
 	providedIn: 'root'
 })
 
 export class ChallengeService {
-	constructor() { }
+	challenge: Challenge[] = [];
+
+	name: string = "";
+	description: string = "";
+	tools: Array<string> = [];
+
+	constructor(public router: Router) { }
 
 	getInfos(id: number): any {
 		// TODO
@@ -48,5 +62,20 @@ export class ChallengeService {
 			description: 'Aucune information disponible pour ce challenge.',
 			tools: ["Aucun outil disponible"]
 		};
+	}
+
+	add(competitionId: number): boolean {
+		this.challenge.push({
+			name: this.name,
+			description: this.description,
+			tools: this.tools,
+			competitionId: competitionId
+		});
+
+		console.log("Challenge added:", this.challenge);
+
+		this.router.navigate(['/competition', competitionId]);
+
+		return true;
 	}
 }

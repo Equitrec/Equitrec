@@ -7,8 +7,7 @@ import { UserService } from './services/users/user.service';
 	selector: 'app-root',
 	imports: [
 		RouterOutlet,
-		RouterModule,
-		NgIf
+		RouterModule
 	],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.css'

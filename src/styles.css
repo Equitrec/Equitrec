@@ -87,7 +87,7 @@ body, html {
 }
 
 .tile {
-	background-color: #fbeacc;
+	background-color: #ffe8be;
 	border-radius: 10px;
 	box-shadow: 0 5px 5px #e0a84836;
 	width: fit-content;
@@ -98,7 +98,15 @@ body, html {
 	}
 }
 
-input {
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	padding: 20px;
+	align-items: center;
+}
+
+input, textarea, select {
 	background-color: var(--background-color);
 	border: 0;
 	border-radius: 9px;
@@ -106,6 +114,9 @@ input {
 	width: 100%;
 	box-sizing: border-box;
 	transition: 200ms;
+	resize: vertical;
+	min-height: 34px;
+	height: 34px;
 }
 
 button,
@@ -123,12 +134,16 @@ button,
 	}
 }
 
-.back_button {
-	box-shadow: #b9b9b9 0 3px 10px;
-    position: absolute;
-	top: 293px;
+.title_button_container {
+	position: absolute;
+	top: 300px;
 	left: 10%;
-    z-index: 10;
+	z-index: 10;
+
+	.item {
+		box-shadow: #b9b9b9 0 3px 10px;
+		margin-right: 20px;
+	}
 }
 
 h1 {

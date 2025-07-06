@@ -2,7 +2,6 @@
 	display: flex;
 	flex-direction: row;
 	gap: 40px;
-	margin-top: 20px;
 
 	.competition_details {
 		display: flex;

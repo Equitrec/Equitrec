@@ -1,16 +1,39 @@
 import { Injectable } from '@angular/core';
 import { CallService } from '../utils/call.service';
+import { Router } from '@angular/router';
+
+export interface User {
+	username: string,
+	role: number,
+}
 
 @Injectable({
 	providedIn: 'root'
 })
 
 export class UserService {
+	user: User[] = [];
+
 	username: string = "";
 	password: string = "";
 	token: string = "";
+	role: number = 0;
 
-	constructor(private call: CallService) { }
+	constructor(private call: CallService, public router: Router) { }
+
+	add(competitionId: number): boolean {
+		this.user.push({
+			username: this.username,
+			role: this.role
+		});
+
+		console.log("User added:", this.user);
+
+		this.router.navigate(['/competition', competitionId]);
+
+		return true;
+
+	}
 
 	login(): boolean {
 		this.call.callApi("login", { username: this.username, password: this.password })
@@ -85,6 +108,12 @@ export class UserService {
 				username: 'paul.leclerc',
 				password: 'paulpass',
 				role: 1
+			},
+			{
+				id: 11,
+				username: 'admin',
+				password: 'adminpass',
+				role: 10
 			}
 		];
 

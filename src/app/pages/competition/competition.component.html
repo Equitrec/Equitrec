@@ -1,4 +1,8 @@
-<a class="button back_button" (click)="this.location.back()"><i class="ri-arrow-go-back-line"></i> Retour</a>
+<nav class="title_button_container">
+	<a class="button item" routerLink="/"><i class="ri-arrow-go-back-line"></i> Retour</a>
+	<a class="button item" [routerLink]="['/create/challenge', this.competitionId]"><i class="ri-function-add-line"></i> Ajouter une épreuve</a>
+	<a class="button item" [routerLink]="['/create/user', this.competitionId]"><i class="ri-user-add-line"></i> Ajouter un participant</a>
+</nav>
 
 <div class="competition_container">
 	<tile-competition
@@ -6,7 +10,7 @@
 	></tile-competition>
 
 	<div class="competition_details">
-		<h1>Utilisateurs</h1>
+		<h1>Participants</h1>
 		<div class="users">
 			<a *ngFor="let user of competitonService.getUsers(this.competitionId)" [routerLink]="['/users', userService.getInfos(user).id]">
 				<tile-user

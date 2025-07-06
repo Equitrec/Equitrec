@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 export interface Competition {
 	name: string,
@@ -23,9 +24,9 @@ export class CompetitionService {
 	status: number = 0;
 	location: string = "";
 
-	constructor() { }
+	constructor(public router: Router) { }
 
-	add() {
+	add(): boolean {
 		this.competition.push({
 			name: this.name,
 			dateStart: this.dateStart,
@@ -36,6 +37,8 @@ export class CompetitionService {
 		});
 
 		console.log("Competition added:", this.competition);
+
+		this.router.navigate(['/']);
 
 		return true;
 	}
@@ -112,15 +115,15 @@ export class CompetitionService {
 		const users = [
 			{
 				id: 1,
-				users: [4, 5]
+				users: [1, 5]
 			},
 			{
 				id: 2,
-				users: [4, 8, 9]
+				users: [4, 3, 9]
 			},
 			{
 				id: 3,
-				users: [6, 4]
+				users: [6, 2]
 			}
 		]
 

@@ -1,0 +1,16 @@
+<nav class="title_button_container">
+	<a class="button item" [routerLink]="['/competition', this.competitionId]"><i class="ri-arrow-go-back-line"></i> Retour</a>
+</nav>
+
+<div class="tile form">
+	<h1>Ajouter une épreuve</h1>
+
+	<input type="text" [(ngModel)]="this.userService.username" placeholder="Identifiant" />
+	<select [(ngModel)]="this.userService.role">
+		<option value="1">Cavalier</option>
+		<option value="2">Juge</option>
+		<option value="10">Administrateur</option>
+	</select>
+
+	<button (click)="this.userService.add(this.competitionId)">Ajouter un uilisateur</button>
+</div>
