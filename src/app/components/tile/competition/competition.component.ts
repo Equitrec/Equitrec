@@ -3,6 +3,7 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CompetitionService } from '../../../services/competitions/competition.service';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../../services/users/user.service';
+import { FormatService } from '../../../services/utils/format.service';
 
 @Component({
 	selector: 'tile-competition',
@@ -19,7 +20,8 @@ export class CompetitionComponent {
 	constructor(
 		public competitonService: CompetitionService,
 		public userService: UserService,
-		public route: ActivatedRoute
+		public route: ActivatedRoute,
+		public formatService: FormatService
 	) {
 		this.competitionId = Number(this.route.snapshot.paramMap.get('id'));
 	}

@@ -23,5 +23,6 @@ export class AddChallengeComponent {
 		this.challengeService.name = '';
 		this.challengeService.description = '';
 		this.challengeService.tools = [];
+		this.challengeService.level = 1;
 	}
 }

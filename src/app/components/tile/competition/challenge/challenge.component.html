@@ -15,6 +15,10 @@
 			</span>
 		</p>
 	</div>
+	<div class="content">
+		<label>Niveau</label>
+		<p>{{ formatService.formatLevel(challenge.level) }}</p>
+	</div>
 
 	<div class="action_button_container">
 		<a class="action_button" [routerLink]="['/edit/challenge', this.challenge.id]"><i class="ri-pencil-line"></i></a>

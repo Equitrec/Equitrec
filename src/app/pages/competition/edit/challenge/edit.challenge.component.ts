@@ -25,5 +25,6 @@ export class EditChallengeComponent {
 		this.challengeService.name = challengeInfo.name;
 		this.challengeService.description = challengeInfo.description;
 		this.challengeService.tools = challengeInfo.tools;
+		this.challengeService.level = challengeInfo.level
 	}
 }

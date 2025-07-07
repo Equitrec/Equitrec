@@ -32,7 +32,7 @@ export class CompetitionService {
 			organizer: 1,
 			dateStart: new Date('2025-01-01 00:00:00'),
 			dateEnd: new Date('2025-01-31 23:59:59'),
-			status: 'active',
+			status: 1,
 			location: 'Boulerie master',
 			challenges: [
 				1,
@@ -47,7 +47,7 @@ export class CompetitionService {
 			organizer: 3,
 			dateStart: new Date('2025-02-01 00:00:00'),
 			dateEnd: new Date('2025-02-28 23:59:59'),
-			status: 'inactive',
+			status: 0,
 			location: 'Zoom master - Grand Théâtre',
 			challenges: [
 				2,
@@ -64,7 +64,7 @@ export class CompetitionService {
 			organizer: 2,
 			dateStart: new Date('2025-03-01 00:00:00'),
 			dateEnd: new Date('2025-03-31 23:59:59'),
-			status: 'progress',
+			status: 3,
 			location: 'Angers',
 			challenges: [
 				3
