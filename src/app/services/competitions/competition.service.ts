@@ -38,8 +38,8 @@ export class CompetitionService {
 			name: 'VoltigeChampionats de france amateur',
 			description: 'Description for Competition 1',
 			user: 1,
-			dateStart: new Date('2025-01-01 00:00:00'),
-			dateEnd: new Date('2025-01-31 23:59:59'),
+			dateStart: new Date('2025-08-07 14:30:00'),
+			dateEnd: new Date('2025-08-07 18:00:00'),
 			status: 1,
 			location: 'Boulerie master',
 			challenges: [
@@ -53,8 +53,8 @@ export class CompetitionService {
 			name: 'Boulerie master dressage',
 			description: 'Description for Competition 2',
 			user: 3,
-			dateStart: new Date('2025-02-01 00:00:00'),
-			dateEnd: new Date('2025-02-28 23:59:59'),
+			dateStart: new Date('2025-02-08 12:00:00'),
+			dateEnd: new Date('2025-02-08 14:15:00'),
 			status: 0,
 			location: 'Zoom master - Grand Théâtre',
 			challenges: [
@@ -70,8 +70,8 @@ export class CompetitionService {
 			name: 'Dressage boulerie festival & finales france dressage',
 			description: 'Description for Competition 3',
 			user: 2,
-			dateStart: new Date('2025-03-01 00:00:00'),
-			dateEnd: new Date('2025-03-31 23:59:59'),
+			dateStart: new Date('2025-10-10 11:00:00'),
+			dateEnd: new Date('2025-10-10 19:00:00'),
 			status: 3,
 			location: 'Angers',
 			challenges: [
@@ -79,6 +79,21 @@ export class CompetitionService {
 			]
 		}
 	];
+
+	users = [
+		{
+			id: 1,
+			users: [1, 5]
+		},
+		{
+			id: 2,
+			users: [4, 3, 9, 8, 7, 1]
+		},
+		{
+			id: 3,
+			users: [6, 2]
+		}
+	]
 
 	constructor(public call: CallService, public router: Router) {
 		this.competitionsSubject.next(this.compet.map(c => c.id));
@@ -110,7 +125,7 @@ export class CompetitionService {
 		}
 
 		this.compet.push({
-			id: this.competitionsSubject.getValue().length + 1,
+			id: this.compet.length > 0 ? Math.max(...this.compet.map(c => c.id)) + 1 : 0,
 			name: this.name,
 			description: this.description,
 			dateStart: new Date(this.dateStart),
@@ -255,21 +270,6 @@ export class CompetitionService {
 			console.error("Error fetching competition users:", error);
 		}
 
-		const users = [
-			{
-				id: 1,
-				users: [1, 5]
-			},
-			{
-				id: 2,
-				users: [4, 3, 9, 8, 7, 1]
-			},
-			{
-				id: 3,
-				users: [6, 2]
-			}
-		]
-
-		return users.find(c => c.id === id)?.users || [];
+		return this.users.find(u => u.id === id)?.users || [];
 	}
 }

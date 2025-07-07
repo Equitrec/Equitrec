@@ -30,8 +30,6 @@ export class CompetitionComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log(this.competition);
-
 		this.competitionInfos = this.competitonService.getInfos(this.competition);
 		this.username = this.userService.getInfos(this.competitionInfos.user).username;
 		this.usersCount = this.competitonService.getUsers(this.competitionInfos.id).length;

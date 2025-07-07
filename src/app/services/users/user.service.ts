@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { CallService } from '../utils/call.service';
 import { Router } from '@angular/router';
+import { CompetitionService } from '../competitions/competition.service';
+import { Location } from '@angular/common';
 
 export interface User {
+	id: number,
 	username: string,
 	role: number,
 }
@@ -14,6 +17,7 @@ export interface User {
 export class UserService {
 	user: User[] = [];
 
+	id: number = 0;
 	username: string = "";
 	password: string = "";
 	token: string = "";
@@ -25,74 +29,74 @@ export class UserService {
 			username: 'jules.dupont',
 			password: 'password',
 			role: 2,
-			token: "Llj5PAOqU2sm0edATrKC7zdU50suJVt1"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoianVsZXMuZHVwb250In0.dummysignature1"
 		},
 		{
 			id: 2,
 			username: 'juliette.auberville',
 			password: 'password1243',
 			role: 2,
-			token: "XyZ9QWErT6u8vB3n4m5pL7k8jH2q1s0a"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJuYW1lIjoianVsaWV0dGUuYXViZXJ2aWxsZSJ9.dummysignature2"
 		},
 		{
 			id: 3,
 			username: 'jerome.belier',
 			password: 'password',
 			role: 2,
-			token: "VW03MH2kiKUCQqbW2vj3sQI6SPqTDzpR"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInVzZXJuYW1lIjoiamVyb21lLmJlbGllciJ9.dummysignature3"
 		},
 		{
 			id: 4,
 			username: 'marie.leroux',
 			password: 'password123',
 			role: 1,
-			token: "LKuU33oi6cJ7E2p6Vas797cG17SioS2f"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInVzZXJuYW1lIjoibWFyaWUubGVyb3V4In0.dummysignature4"
 		},
 		{
 			id: 5,
 			username: 'antoine.martin',
 			password: 'securepass',
 			role: 1,
-			token: "ZyXwVUTSRQPONMLKJIHGFEDCBA9876543210"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsInVzZXJuYW1lIjoiYW50b2luZS5tYXJ0aW4ifQ.dummysignature5"
 		},
 		{
 			id: 6,
 			username: 'camille.durand',
 			password: 'mypassword',
 			role: 1,
-			token: "54oib1CZsvtGR9R9qbITgUliea2812JT"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInVzZXJuYW1lIjoiY2FtaWxsZS5kdXJhbmQifQ.dummysignature6"
 		},
 		{
 			id: 7,
 			username: 'lucas.moireau',
 			password: 'passw0rd',
 			role: 1,
-			token: "VzupXtzEmw9O4QtRB10a75xyf4QsExgI"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsInVzZXJuYW1lIjoibHVjYXMubW9pcmVhdSJ9.dummysignature7"
 		},
 		{
 			id: 8,
 			username: 'sophie.bernard',
 			password: 's0phie123',
 			role: 1,
-			token: "fXbajfG3li1Zy0g2AAumC3YypewaDEds"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsInVzZXJuYW1lIjoic29paGllLmJlcm5hcmQifQ.dummysignature8"
 		},
 		{
 			id: 9,
 			username: 'paul.leclerc',
 			password: 'paulpass',
 			role: 1,
-			token: "HZTxthQ9a1yuEOlVgbzDp3KhXYsJLRGt"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjl9.dummysignature9"
 		},
 		{
 			id: 11,
 			username: 'admin',
 			password: 'adminpass',
 			role: 10,
-			token: "a54ZH6HHWJmkw45BUb6xleVImYRMw0qQ"
+			token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJ1c2VyIjoiYWRtaW4ifQ.dummysignatureadmin"
 		}
 	];
 
-	constructor(private call: CallService, public router: Router) { }
+	constructor(private call: CallService, public router: Router, public competitionService: CompetitionService, public location: Location) { }
 
 	add(competitionId: number): boolean {
 		try {
@@ -116,9 +120,25 @@ export class UserService {
 			console.error("Error adding user:", error);
 		}
 
+		this.id = this.users.length > 0 ? Math.max(...this.users.map(u => u.id)) + 1 : 1;
+
 		this.user.push({
+			id: this.id,
 			username: this.username,
 			role: this.role
+		});
+
+		const userGroup = this.competitionService.users.find(competition => competition.id === competitionId);
+		if (userGroup) {
+			userGroup.users.push(this.id);
+		}
+
+		this.users.push({
+			id: this.id,
+			username: this.username,
+			password: "",
+			role: this.role,
+			token: ""
 		});
 
 		console.log("User added:", this.user);
@@ -144,6 +164,10 @@ export class UserService {
 			}
 
 			this.users = this.users.filter(u => u.id !== id);
+
+			this.competitionService.users.forEach(competition => {
+				competition.users = competition.users.filter(userId => userId !== id);
+			});
 
 			console.log("User deleted:", id);
 
@@ -174,7 +198,7 @@ export class UserService {
 
 		console.log("User updated:", this.users[index]);
 
-		this.router.navigate(["/"]);
+		this.location.back();
 
 		return true;
 	}

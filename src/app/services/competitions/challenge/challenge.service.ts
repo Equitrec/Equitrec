@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { CallService } from '../../utils/call.service';
+import { Location } from '@angular/common';
+import { CompetitionService } from '../competition.service';
 
 export interface Challenge {
+	id: number,
 	name: string,
 	description: string,
-	tools: Array<string>
+	tools: string[],
 	level: number,
 	competitionId: number
 }
@@ -17,9 +20,10 @@ export interface Challenge {
 export class ChallengeService {
 	challenge: Challenge[] = [];
 
+	id: number = 0;
 	name: string = "";
 	description: string = "";
-	tools: Array<string> = [];
+	tools: string[] = [];
 	level: number = 0;
 
 	challenges = [
@@ -60,7 +64,7 @@ export class ChallengeService {
 		}
 	];
 
-	constructor(public call: CallService, public router: Router) { }
+	constructor(public call: CallService, public router: Router, public competitionService: CompetitionService, public location: Location) { }
 
 	add(competitionId: number): boolean {
 		try {
@@ -71,7 +75,7 @@ export class ChallengeService {
 					"id": competitionId,
 					"name": this.name,
 					"description": this.description,
-					"tools": this.tools,
+					"tools": [...this.tools],
 					"level": this.level
 				}
 			)
@@ -86,12 +90,28 @@ export class ChallengeService {
 			console.error("Error adding challenge:", error);
 		}
 
+		this.id = this.challenges.length > 0 ? Math.max(...this.challenges.map(c => c.id)) + 1 : 0;
+
 		this.challenge.push({
+			id: this.id,
 			name: this.name,
 			description: this.description,
-			tools: this.tools,
+			tools: [...this.tools],
 			level: this.level,
 			competitionId: competitionId
+		});
+
+		const challengeGroup = this.competitionService.compet.find(challenge => challenge.id === competitionId);
+		if (challengeGroup) {
+			challengeGroup.challenges.push(this.id);
+		}
+
+		this.challenges.push({
+			id: this.id,
+			name: this.name,
+			description: this.description,
+			tools: [...this.tools],
+			level: this.level
 		});
 
 		console.log("Challenge added:", this.challenge);
@@ -117,6 +137,10 @@ export class ChallengeService {
 			}
 
 			this.challenges = this.challenges.filter(challenge => challenge.id !== id);
+
+			this.competitionService.compet.forEach(competition => {
+				competition.challenges = competition.challenges.filter(challengeId => challengeId !== id);
+			});
 
 			console.log("Challenge deleted:", id);
 
@@ -159,7 +183,7 @@ export class ChallengeService {
 
 		console.log("Challenge updated:", this.challenges[index]);
 
-		this.router.navigate(["/"]);
+		this.location.back();
 
 		return true;
 	}
