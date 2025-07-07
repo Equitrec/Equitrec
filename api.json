@@ -1,0 +1,643 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Equitrec API",
+		"description": "API for managing equestrian competitions, users, and challenges",
+		"version": "1.0.0"
+	},
+	"host": "localhost:3000",
+	"basePath": "/",
+	"schemes": ["http"],
+	"consumes": ["application/x-www-form-urlencoded"],
+	"produces": ["application/json"],
+	"paths": {
+		"/login": {
+		"post": {
+			"summary": "User login",
+			"description": "Authenticate a user with username and password",
+			"parameters": [
+			{
+				"name": "username",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "password",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Login successful",
+				"schema": {
+				"type": "object",
+				"properties": {
+					"data": {
+					"type": "object",
+					"properties": {
+						"token": {
+						"type": "string"
+						}
+					}
+					}
+				}
+				}
+			},
+			"401": {
+				"description": "Invalid credentials"
+			}
+			}
+		}
+		},
+		"/user/add": {
+		"post": {
+			"summary": "Add user to competition",
+			"description": "Add a user to a specific competition",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "formData",
+				"required": true,
+				"type": "integer",
+				"description": "Competition ID"
+			},
+			{
+				"name": "username",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "role",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "User added successfully"
+			},
+			"400": {
+				"description": "Bad request"
+			}
+			}
+		}
+		},
+		"/user/delete/{id}": {
+		"delete": {
+			"summary": "Delete user",
+			"description": "Delete a user by ID",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "User deleted successfully"
+			},
+			"404": {
+				"description": "User not found"
+			}
+			}
+		}
+		},
+		"/user/update": {
+		"post": {
+			"summary": "Update user",
+			"description": "Update user information",
+			"parameters": [
+			{
+				"name": "username",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "role",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "User updated successfully"
+			},
+			"400": {
+				"description": "Bad request"
+			}
+			}
+		}
+		},
+		"/user/check": {
+		"post": {
+			"summary": "Check user token",
+			"description": "Validate user token",
+			"parameters": [
+			{
+				"name": "username",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "token",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Token is valid",
+				"schema": {
+				"type": "object",
+				"properties": {
+					"message": {
+					"type": "string"
+					}
+				}
+				}
+			},
+			"401": {
+				"description": "Invalid token"
+			}
+			}
+		}
+		},
+		"/user/infos/{id}": {
+		"get": {
+			"summary": "Get user information",
+			"description": "Retrieve user information by ID",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "User information",
+				"schema": {
+				"type": "object",
+				"properties": {
+					"data": {
+					"$ref": "#/definitions/User"
+					}
+				}
+				}
+			},
+			"404": {
+				"description": "User not found"
+			}
+			}
+		}
+		},
+		"/competition/add": {
+		"post": {
+			"summary": "Add competition",
+			"description": "Create a new competition",
+			"parameters": [
+			{
+				"name": "name",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "dateStart",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "dateEnd",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "user",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "status",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "location",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Competition created successfully"
+			},
+			"400": {
+				"description": "Bad request"
+			}
+			}
+		}
+		},
+		"/competition/delete": {
+		"delete": {
+			"summary": "Delete competition",
+			"description": "Delete a competition by ID",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Competition deleted successfully"
+			},
+			"404": {
+				"description": "Competition not found"
+			}
+			}
+		}
+		},
+		"/competition/update": {
+		"post": {
+			"summary": "Update competition",
+			"description": "Update competition information",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "name",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "dateStart",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "dateEnd",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "location",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Competition updated successfully"
+			},
+			"400": {
+				"description": "Bad request"
+			}
+			}
+		}
+		},
+		"/competitions": {
+		"get": {
+			"summary": "Get all competitions",
+			"description": "Retrieve list of all competitions",
+			"responses": {
+			"200": {
+				"description": "List of competitions",
+				"schema": {
+				"type": "object",
+				"properties": {
+					"data": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Competition"
+					}
+					}
+				}
+				}
+			}
+			}
+		}
+		},
+		"/competition/infos/{id}": {
+		"get": {
+			"summary": "Get competition information",
+			"description": "Retrieve competition information by ID",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Competition information",
+				"schema": {
+				"type": "object",
+				"properties": {
+					"data": {
+					"$ref": "#/definitions/Competition"
+					}
+				}
+				}
+			},
+			"404": {
+				"description": "Competition not found"
+			}
+			}
+		}
+		},
+		"/competition/{id}/users": {
+		"get": {
+			"summary": "Get competition users",
+			"description": "Retrieve users participating in a competition",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "List of users in competition",
+				"schema": {
+				"type": "object",
+				"properties": {
+					"data": {
+					"type": "array",
+					"items": {
+						"type": "integer"
+					}
+					}
+				}
+				}
+			},
+			"404": {
+				"description": "Competition not found"
+			}
+			}
+		}
+		},
+		"/challenge/add": {
+		"post": {
+			"summary": "Add challenge",
+			"description": "Create a new challenge for a competition",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "formData",
+				"required": true,
+				"type": "integer",
+				"description": "Competition ID"
+			},
+			{
+				"name": "name",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "description",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "tools",
+				"in": "formData",
+				"required": true,
+				"type": "array",
+				"items": {
+				"type": "string"
+				}
+			},
+			{
+				"name": "level",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Challenge created successfully"
+			},
+			"400": {
+				"description": "Bad request"
+			}
+			}
+		}
+		},
+		"/challenge/delete/{id}": {
+		"delete": {
+			"summary": "Delete challenge",
+			"description": "Delete a challenge by ID",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Challenge deleted successfully"
+			},
+			"404": {
+				"description": "Challenge not found"
+			}
+			}
+		}
+		},
+		"/challenge/update": {
+		"post": {
+			"summary": "Update challenge",
+			"description": "Update challenge information",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			},
+			{
+				"name": "name",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "description",
+				"in": "formData",
+				"required": true,
+				"type": "string"
+			},
+			{
+				"name": "tools",
+				"in": "formData",
+				"required": true,
+				"type": "array",
+				"items": {
+				"type": "string"
+				}
+			},
+			{
+				"name": "level",
+				"in": "formData",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Challenge updated successfully"
+			},
+			"400": {
+				"description": "Bad request"
+			}
+			}
+		}
+		},
+		"/challenge/infos/{id}": {
+		"get": {
+			"summary": "Get challenge information",
+			"description": "Retrieve challenge information by ID",
+			"parameters": [
+			{
+				"name": "id",
+				"in": "path",
+				"required": true,
+				"type": "integer"
+			}
+			],
+			"responses": {
+			"200": {
+				"description": "Challenge information",
+				"schema": {
+				"type": "object",
+				"properties": {
+					"data": {
+					"$ref": "#/definitions/Challenge"
+					}
+				}
+				}
+			},
+			"404": {
+				"description": "Challenge not found"
+			}
+			}
+		}
+		}
+	},
+	"definitions": {
+		"User": {
+		"type": "object",
+		"properties": {
+			"id": {
+			"type": "integer"
+			},
+			"username": {
+			"type": "string"
+			},
+			"role": {
+			"type": "integer"
+			},
+			"token": {
+			"type": "string"
+			}
+		}
+		},
+		"Competition": {
+		"type": "object",
+		"properties": {
+			"id": {
+			"type": "integer"
+			},
+			"name": {
+			"type": "string"
+			},
+			"description": {
+			"type": "string"
+			},
+			"dateStart": {
+			"type": "integer"
+			},
+			"dateEnd": {
+			"type": "integer"
+			},
+			"user": {
+			"type": "integer"
+			},
+			"status": {
+			"type": "integer"
+			},
+			"location": {
+			"type": "string"
+			},
+			"challenges": {
+			"type": "array",
+			"items": {
+				"type": "integer"
+			}
+			}
+		}
+		},
+		"Challenge": {
+		"type": "object",
+		"properties": {
+			"id": {
+			"type": "integer"
+			},
+			"name": {
+			"type": "string"
+			},
+			"description": {
+			"type": "string"
+			},
+			"tools": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+			},
+			"level": {
+			"type": "integer"
+			},
+			"competitionId": {
+			"type": "integer"
+			}
+		}
+		}
+	}
+}
