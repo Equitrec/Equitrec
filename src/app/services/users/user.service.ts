@@ -145,6 +145,13 @@ export class UserService {
 		return true;
 	}
 
+	disconnect(): boolean {
+		localStorage.removeItem("token");
+		this.router.navigate(['/login']);
+
+		return true;
+	}
+
 	checkToken(): boolean {
 		// TODO
 		return true;
