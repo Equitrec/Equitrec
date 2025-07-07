@@ -96,6 +96,8 @@ export class CompetitionService {
 
 		console.log("Competition deleted:", id);
 
+		this.router.navigate(['/']);
+
 		return true;
 	}
 
