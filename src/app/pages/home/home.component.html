@@ -3,9 +3,9 @@
 </nav>
 
 <div class="competition_container">
-	<a *ngFor="let competitionId of competitionService.getCompetitions()" [routerLink]="['/competition', competitionId]">
+	<a *ngFor="let competitionId of this.competitions" [routerLink]="['/competition', competitionId]">
 		<tile-competition
-			[competition]="competitionService.getInfos(competitionId)"
+			[competition]="competitionId"
 		/>
 	</a>
 </div>

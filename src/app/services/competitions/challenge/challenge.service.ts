@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CallService } from '../../utils/call.service';
 
 export interface Challenge {
 	name: string,
@@ -59,9 +60,32 @@ export class ChallengeService {
 		}
 	];
 
-	constructor(public router: Router) { }
+	constructor(public call: CallService, public router: Router) { }
 
 	add(competitionId: number): boolean {
+		try {
+			this.call.callApi(
+				"challenge/add",
+				"post",
+				{
+					"id": competitionId,
+					"name": this.name,
+					"description": this.description,
+					"tools": this.tools,
+					"level": this.level
+				}
+			)
+			.subscribe(response => {
+				return true;
+			}, error => {
+				console.error(error);
+
+				return false;
+			});
+		} catch (error) {
+			console.error("Error adding challenge:", error);
+		}
+
 		this.challenge.push({
 			name: this.name,
 			description: this.description,
@@ -78,6 +102,19 @@ export class ChallengeService {
 	}
 
 	delete(id: number): boolean {
+		try {
+			this.call.callApi("challenge/delete/" + id, "delete", { })
+			.subscribe(response => {
+				return true;
+			}, error => {
+				console.error(error);
+
+				return false;
+			});
+		} catch (error) {
+			console.error("Error deleting challenge:", error);
+		}
+
 		if (confirm("Etes-vous sûr de vouloir supprimer cette épreuve ?")) {
 			this.challenges = this.challenges.filter(challenge => challenge.id !== id);
 
@@ -90,6 +127,29 @@ export class ChallengeService {
 	}
 
 	update(id: number): boolean {
+		try {
+			this.call.callApi(
+				"challenge/update",
+				"post",
+				{
+					"id": id,
+					"name": this.name,
+					"description": this.description,
+					"tools": this.tools,
+					"level": this.level
+				}
+			)
+			.subscribe(response => {
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error updating competition:", error);
+		}
+
 		const index = this.challenges.findIndex(challenge => challenge.id === id);
 
 		this.challenges[index].name = this.name;
@@ -105,7 +165,19 @@ export class ChallengeService {
 	}
 
 	getInfos(id: number): any {
-		// TODO
+		try {
+			this.call.callApi("challenge/infos/" + id, "get", {})
+			.subscribe(response => {
+				// return response.data;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error fetching competition info:", error);
+		}
+
 		return this.challenges.find(challenge => challenge.id === id) || {
 			id: 0,
 			name: "Challenge inconnu",

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CallService } from '../utils/call.service';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Competition {
 	name: string,
 	dateStart: number,
 	dateEnd: number,
-	user: string,
+	user: number,
 	status: number,
 	location: string
 }
@@ -20,7 +22,7 @@ export class CompetitionService {
 	name: string = "";
 	dateStart: number = 0;
 	dateEnd: number = 0;
-	user: string = "";
+	user: number = 0;
 	status: number = 0;
 	location: string = "";
 
@@ -70,11 +72,35 @@ export class CompetitionService {
 				3
 			]
 		}
-	]
+	];
 
-	constructor(public router: Router) { }
+	constructor(public call: CallService, public router: Router) { }
 
 	add(): boolean {
+		try {
+			this.call.callApi(
+				"competition/add",
+				"post",
+				{
+					"name": this.name,
+					"dateStart": this.dateStart,
+					"dateEnd": this.dateEnd,
+					"user": this.user,
+					"status": this.status,
+					"location": this.location
+				}
+			)
+			.subscribe(response => {
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error adding competition:", error);
+		}
+
 		this.competition.push({
 			name: this.name,
 			dateStart: this.dateStart,
@@ -92,6 +118,19 @@ export class CompetitionService {
 	}
 
 	delete(id: number): boolean {
+		try {
+			this.call.callApi("competition/delete", "delete", { "id": id + "" })
+			.subscribe(response => {
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error deleting competition:", error);
+		}
+
 		if (confirm("Etes-vous sûr de vouloir supprimer cette compétition ?")) {
 			this.compet = this.compet.filter(c => c.id !== id);
 
@@ -106,6 +145,29 @@ export class CompetitionService {
 	}
 
 	update(id: number): boolean {
+		try {
+			this.call.callApi(
+				"competition/update",
+				"post",
+				{
+					"id": id,
+					"name": this.name,
+					"dateStart": this.dateStart,
+					"dateEnd": this.dateEnd,
+					"location": this.location
+				}
+			)
+			.subscribe(response => {
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error updating competition:", error);
+		}
+
 		const index = this.compet.findIndex(c => c.id === id);
 
 		this.compet[index].name = this.name;
@@ -121,12 +183,36 @@ export class CompetitionService {
 	}
 
 	getCompetitions(): any[] {
-		// TODO
+		try {
+			this.call.callApi("competitions", "get", {})
+			.subscribe(response => {
+				// return response.data;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error fetching competitions:", error);
+		}
+
 		return this.compet.map(c => c.id);
 	}
 
 	getInfos(id: number): any {
-		// TODO
+		try {
+			this.call.callApi("competition/infos/" + id, "get", {})
+			.subscribe(response => {
+				// return response.data;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error fetching competition info:", error);
+		}
+
 		return this.compet.find(c => c.id === id) || {
 			id: 0,
 			name: "Compétition inconnue",
@@ -141,7 +227,19 @@ export class CompetitionService {
 	}
 
 	getUsers(id: number): any[] {
-		// TODO
+		try {
+			this.call.callApi("competition/" + id + "/users", "get", {})
+			.subscribe(response => {
+				// return response.data;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error fetching competition users:", error);
+		}
+
 		const users = [
 			{
 				id: 1,

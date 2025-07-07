@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CompetitionService } from '../../../services/competitions/competition.service';
 import { CommonModule } from '@angular/common';
@@ -12,10 +12,13 @@ import { FormatService } from '../../../services/utils/format.service';
 	templateUrl: './competition.component.html'
 })
 
-export class CompetitionComponent {
+export class CompetitionComponent implements OnInit {
 	competitionId: number = 0;
+	competitionInfos: any = [];
+	username: string = "";
+	usersCount: number = 0;
 
-	@Input() competition: any;
+	@Input() competition: number = 0;
 
 	constructor(
 		public competitonService: CompetitionService,
@@ -24,6 +27,14 @@ export class CompetitionComponent {
 		public formatService: FormatService
 	) {
 		this.competitionId = Number(this.route.snapshot.paramMap.get('id'));
+	}
+
+	ngOnInit(): void {
+		console.log(this.competition);
+
+		this.competitionInfos = this.competitonService.getInfos(this.competition);
+		this.username = this.userService.getInfos(this.competitionInfos.organizer).username;
+		this.usersCount = this.competitonService.getUsers(this.competitionInfos.id).length;
 	}
 
 	deleteCompetition(event: Event, competitionId: number): void {

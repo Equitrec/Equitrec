@@ -95,6 +95,27 @@ export class UserService {
 	constructor(private call: CallService, public router: Router) { }
 
 	add(competitionId: number): boolean {
+		try {
+			this.call.callApi(
+				"user/add",
+				"post",
+				{
+					"id": competitionId,
+					"username": this.username,
+					"role": this.role
+				}
+			)
+			.subscribe(response => {
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error adding user:", error);
+		}
+
 		this.user.push({
 			username: this.username,
 			role: this.role
@@ -108,6 +129,19 @@ export class UserService {
 	}
 
 	delete(id: number): boolean {
+		try {
+			this.call.callApi("user/delete/" + id, "delete", { })
+			.subscribe(response => {
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error deleting user:", error);
+		}
+
 		if (confirm("Etes-vous sûr de vouloir supprimer cet utilisateur ?")) {
 			this.users = this.users.filter(u => u.id !== id);
 
@@ -120,6 +154,19 @@ export class UserService {
 	}
 
 	update(id: number): boolean {
+		try {
+			this.call.callApi("user/update", "post", { "username": this.username, "role": this.role })
+			.subscribe(response => {
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error updating user:", error);
+		}
+
 		const index = this.users.findIndex(u => u.id === id);
 
 		this.users[index].username = this.username;
@@ -133,16 +180,35 @@ export class UserService {
 	}
 
 	login(): boolean {
-		this.call.callApi("login", { username: this.username, password: this.password })
-		.subscribe(response => {
-			localStorage.setItem("token", response.data.token);
+		try {
+			this.call.callApi("login", "post", { "username": this.username, "password": this.password })
+			.subscribe(response => {
+				localStorage.setItem("token", response.data.token);
 
-			this.router.navigate(['/']);
-		}, error => {
-			console.error(error);
-		});
+				this.router.navigate(['/']);
 
-		return true;
+				// return true;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error during login:", error);
+		}
+
+		if (this.users.some(user => user.username === this.username)) {
+			const user = this.users.find(user => user.username === this.username);
+			if (user && user.password === this.password) {
+				localStorage.setItem("token", user.token);
+
+				this.router.navigate(['/']);
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	disconnect(): boolean {
@@ -153,12 +219,39 @@ export class UserService {
 	}
 
 	checkToken(): boolean {
-		// TODO
-		return true;
+		try {
+			this.call.callApi("user/check", "post", { "username": this.username, "token": this.token })
+			.subscribe(response => {
+				// return response.message;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error checking token:", error);
+		}
+
+		if (this.users.some(user => user.token === localStorage.getItem("token"))) {
+			return true;
+		}
+		return false;
 	}
 
 	getInfos(id: number): any {
-		// TODO
+		try {
+			this.call.callApi("user/infos/" + id, "get", {})
+			.subscribe(response => {
+				// return response.data;
+			}, error => {
+				console.error(error);
+
+				// return false;
+			});
+		} catch (error) {
+			console.error("Error fetching user info:", error);
+		}
+
 		return this.users.find(user => user.id === id) || {
 			id: 0,
 			username: "Utilisateur inconnu",

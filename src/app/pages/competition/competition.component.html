@@ -6,27 +6,27 @@
 
 <div class="competition_container">
 	<tile-competition
-		[competition]="competitonService.getInfos(this.competitionId)"
+		[competition]="this.competitionId"
 	></tile-competition>
 
 	<div class="competition_details">
 		<h1>Participants</h1>
 		<div class="users">
-			<ng-container *ngFor="let user of competitonService.getUsers(this.competitionId)">
-				<a *ngIf="userService.getInfos(user).role == 2" [routerLink]="['/users', userService.getInfos(user).id]">
-					<tile-user [user]="userService.getInfos(user)"></tile-user>
+			<ng-container *ngFor="let userInfo of this.userInfos">
+				<a *ngIf="userInfo.role == 2" [routerLink]="['/users', userInfo.id]">
+					<tile-user [user]="userInfo"></tile-user>
 				</a>
-				<ng-container *ngIf="userService.getInfos(user).role != 2">
-					<tile-user [user]="userService.getInfos(user)"></tile-user>
+				<ng-container *ngIf="userInfo.role != 2">
+					<tile-user [user]="userInfo"></tile-user>
 				</ng-container>
 			</ng-container>
 		</div>
 
 		<h1>Epreuves</h1>
 		<div class="challenges">
-			<div *ngFor="let challenge of competitonService.getInfos(this.competitionId).challenges">
+			<div *ngFor="let challengeInfo of this.challengeInfos">
 				<tile-challenge
-					[challenge]="challengeService.getInfos(challenge)"
+					[challenge]="challengeInfo"
 				></tile-challenge>
 			</div>
 		</div>

@@ -17,14 +17,33 @@ import { ChallengeService } from '../../services/competitions/challenge/challeng
 
 export class CompetitionComponent {
 	competitionId: number = 0;
+	competitions: any[];
+	users: any[];
+	challenges: any[];
+	userInfos: any[] = [];
+	challengeInfos: any[] = [];
 
 	constructor(
-		public competitonService: CompetitionService,
+		public competitionService: CompetitionService,
 		public userService: UserService,
 		public challengeService: ChallengeService,
 		private route: ActivatedRoute,
 		public location: Location
 	) {
 		this.competitionId = Number(this.route.snapshot.paramMap.get('id'));
+		this.competitions = competitionService.getCompetitions();
+		this.users = competitionService.getUsers(this.competitionId);
+		this.challenges = competitionService.getInfos(this.competitionId).challenges;
+
+		this.loadUserInfos();
+		this.loadChallengeInfos();
+	}
+
+	private loadUserInfos(): void {
+		this.userInfos = this.users.map(user => this.userService.getInfos(user));
+	}
+
+	private loadChallengeInfos(): void {
+		this.challengeInfos = this.challenges.map(challenge => this.challengeService.getInfos(challenge));
 	}
 }
