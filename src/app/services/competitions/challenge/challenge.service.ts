@@ -70,11 +70,15 @@ export class ChallengeService {
 	}
 
 	delete(id: number): boolean {
-		this.challenges = this.challenges.filter(challenge => challenge.id !== id);
+		if (confirm("Etes-vous sûr de vouloir supprimer cette épreuve ?")) {
+			this.challenges = this.challenges.filter(challenge => challenge.id !== id);
 
-		console.log("Challenge deleted:", id);
+			console.log("Challenge deleted:", id);
 
-		return true;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	update(id: number): boolean {

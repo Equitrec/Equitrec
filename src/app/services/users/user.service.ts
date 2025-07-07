@@ -98,11 +98,15 @@ export class UserService {
 	}
 
 	delete(id: number): boolean {
-		this.users = this.users.filter(u => u.id !== id);
+		if (confirm("Etes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+			this.users = this.users.filter(u => u.id !== id);
 
-		console.log("User deleted:", id);
+			console.log("User deleted:", id);
 
-		return true;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	update(id: number): boolean {

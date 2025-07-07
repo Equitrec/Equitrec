@@ -16,13 +16,18 @@ export class CompetitionComponent {
 
 	@Input() competition: any;
 
-	constructor(public competitonService: CompetitionService, public userService: UserService, public route: ActivatedRoute) {
+	constructor(
+		public competitonService: CompetitionService,
+		public userService: UserService,
+		public route: ActivatedRoute
+	) {
 		this.competitionId = Number(this.route.snapshot.paramMap.get('id'));
 	}
 
 	deleteCompetition(event: Event, competitionId: number): void {
 		event.preventDefault();
 		event.stopPropagation();
+
 		this.competitonService.delete(competitionId);
 	}
 }

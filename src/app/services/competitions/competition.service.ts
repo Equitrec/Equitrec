@@ -92,13 +92,17 @@ export class CompetitionService {
 	}
 
 	delete(id: number): boolean {
-		this.compet = this.compet.filter(c => c.id !== id);
+		if (confirm("Etes-vous sûr de vouloir supprimer cette compétition ?")) {
+			this.compet = this.compet.filter(c => c.id !== id);
 
-		console.log("Competition deleted:", id);
+			console.log("Competition deleted:", id);
 
-		this.router.navigate(['/']);
+			this.router.navigate(['/']);
 
-		return true;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	update(id: number): boolean {

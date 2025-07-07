@@ -15,4 +15,11 @@ export class UserComponent {
 	@Input() user: any;
 
 	constructor(public formatService: FormatService, public userService: UserService) { }
+
+	deleteUser(event: Event, userId: number): void {
+		event.preventDefault();
+		event.stopPropagation();
+
+		this.userService.delete(userId);
+	}
 }

@@ -11,6 +11,6 @@
 
 	<div class="action_button_container">
 		<a class="action_button" [routerLink]="['/edit/user', this.user.id]"><i class="ri-pencil-line"></i></a>
-		<a class="action_button" (click)="this.userService.delete(this.user.id)"><i class="ri-delete-bin-line"></i></a>
+		<a class="action_button" (click)="this.deleteUser($event, this.user.id)"><i class="ri-delete-bin-line"></i></a>
 	</div>
 </div>
