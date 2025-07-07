@@ -24,61 +24,71 @@ export class UserService {
 			id: 1,
 			username: 'jules.dupont',
 			password: 'password',
-			role: 2
+			role: 2,
+			token: "Llj5PAOqU2sm0edATrKC7zdU50suJVt1"
 		},
 		{
 			id: 2,
 			username: 'juliette.auberville',
 			password: 'password1243',
-			role: 2
+			role: 2,
+			token: "XyZ9QWErT6u8vB3n4m5pL7k8jH2q1s0a"
 		},
 		{
 			id: 3,
 			username: 'jerome.belier',
 			password: 'password',
-			role: 2
+			role: 2,
+			token: "VW03MH2kiKUCQqbW2vj3sQI6SPqTDzpR"
 		},
 		{
 			id: 4,
 			username: 'marie.leroux',
 			password: 'password123',
-			role: 1
+			role: 1,
+			token: "LKuU33oi6cJ7E2p6Vas797cG17SioS2f"
 		},
 		{
 			id: 5,
 			username: 'antoine.martin',
 			password: 'securepass',
-			role: 1
+			role: 1,
+			token: "ZyXwVUTSRQPONMLKJIHGFEDCBA9876543210"
 		},
 		{
 			id: 6,
 			username: 'camille.durand',
 			password: 'mypassword',
-			role: 1
+			role: 1,
+			token: "54oib1CZsvtGR9R9qbITgUliea2812JT"
 		},
 		{
 			id: 7,
 			username: 'lucas.moireau',
 			password: 'passw0rd',
-			role: 1
+			role: 1,
+			token: "VzupXtzEmw9O4QtRB10a75xyf4QsExgI"
 		},
 		{
 			id: 8,
 			username: 'sophie.bernard',
 			password: 's0phie123',
-			role: 1
+			role: 1,
+			token: "fXbajfG3li1Zy0g2AAumC3YypewaDEds"
 		},
 		{
 			id: 9,
 			username: 'paul.leclerc',
 			password: 'paulpass',
-			role: 1
+			role: 1,
+			token: "HZTxthQ9a1yuEOlVgbzDp3KhXYsJLRGt"
 		},
 		{
 			id: 11,
 			username: 'admin',
 			password: 'adminpass',
-			role: 10
+			role: 10,
+			token: "a54ZH6HHWJmkw45BUb6xleVImYRMw0qQ"
 		}
 	];
 

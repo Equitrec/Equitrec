@@ -51,6 +51,7 @@ export class QrcodeComponent {
 	};
 	@Input() username: string = "";
 	@Input() password: string = "";
+	@Input() token: string = "";
 
 	constructor(private qrcodeService: QrcodeService) {
 		this.generateQRCode();
@@ -61,6 +62,7 @@ export class QrcodeComponent {
 	}
 
 	generateQRCode() {
-		this.qrCodeConfig = this.qrcodeService.generateQRCodeConfig(`{"username": "${this.username}", "password": "${this.password}"}`, this.options);
+		// this.qrCodeConfig = this.qrcodeService.generateQRCodeConfig(`{"username": "${this.username}", "password": "${this.password}"}`, this.options);
+		this.qrCodeConfig = this.qrcodeService.generateQRCodeConfig(this.token, this.options);
 	}
 }
