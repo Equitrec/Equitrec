@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CompetitionService } from '../../services/competitions/competition.service';
 import { NgFor } from '@angular/common';
@@ -11,10 +11,16 @@ import { CompetitionComponent } from '../../components/tile/competition/competit
 	styleUrl: './home.component.css'
 })
 
-export class HomeComponent {
-	competitions: any[];
+export class HomeComponent implements OnInit {
+	competitions: any[] = [];
 
-	constructor(public competitionService: CompetitionService) {
-		this.competitions = competitionService.getCompetitions();
+	constructor(public competitionService: CompetitionService) {}
+
+	ngOnInit(): void {
+		this.loadCompetitions();
+	}
+
+	private loadCompetitions(): void {
+		this.competitions = this.competitionService.getCompetitions();
 	}
 }

@@ -102,20 +102,20 @@ export class ChallengeService {
 	}
 
 	delete(id: number): boolean {
-		try {
-			this.call.callApi("challenge/delete/" + id, "delete", { })
-			.subscribe(response => {
-				return true;
-			}, error => {
-				console.error(error);
-
-				return false;
-			});
-		} catch (error) {
-			console.error("Error deleting challenge:", error);
-		}
-
 		if (confirm("Etes-vous sûr de vouloir supprimer cette épreuve ?")) {
+			try {
+				this.call.callApi("challenge/delete/" + id, "delete", { })
+				.subscribe(response => {
+					return true;
+				}, error => {
+					console.error(error);
+
+					return false;
+				});
+			} catch (error) {
+				console.error("Error deleting challenge:", error);
+			}
+
 			this.challenges = this.challenges.filter(challenge => challenge.id !== id);
 
 			console.log("Challenge deleted:", id);

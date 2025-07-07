@@ -33,7 +33,7 @@ export class CompetitionComponent implements OnInit {
 		console.log(this.competition);
 
 		this.competitionInfos = this.competitonService.getInfos(this.competition);
-		this.username = this.userService.getInfos(this.competitionInfos.organizer).username;
+		this.username = this.userService.getInfos(this.competitionInfos.user).username;
 		this.usersCount = this.competitonService.getUsers(this.competitionInfos.id).length;
 	}
 

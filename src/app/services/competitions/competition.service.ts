@@ -4,7 +4,9 @@ import { CallService } from '../utils/call.service';
 import { BehaviorSubject } from 'rxjs';
 
 export interface Competition {
+	id: number,
 	name: string,
+	description: string,
 	dateStart: number,
 	dateEnd: number,
 	user: number,
@@ -19,7 +21,11 @@ export interface Competition {
 export class CompetitionService {
 	competition: Competition[] = [];
 
+	private competitionsSubject = new BehaviorSubject<any[]>([]);
+	public competitions$ = this.competitionsSubject.asObservable();
+
 	name: string = "";
+	description: string = "";
 	dateStart: number = 0;
 	dateEnd: number = 0;
 	user: number = 0;
@@ -31,7 +37,7 @@ export class CompetitionService {
 			id: 1,
 			name: 'VoltigeChampionats de france amateur',
 			description: 'Description for Competition 1',
-			organizer: 1,
+			user: 1,
 			dateStart: new Date('2025-01-01 00:00:00'),
 			dateEnd: new Date('2025-01-31 23:59:59'),
 			status: 1,
@@ -46,7 +52,7 @@ export class CompetitionService {
 			id: 2,
 			name: 'Boulerie master dressage',
 			description: 'Description for Competition 2',
-			organizer: 3,
+			user: 3,
 			dateStart: new Date('2025-02-01 00:00:00'),
 			dateEnd: new Date('2025-02-28 23:59:59'),
 			status: 0,
@@ -63,7 +69,7 @@ export class CompetitionService {
 			id: 3,
 			name: 'Dressage boulerie festival & finales france dressage',
 			description: 'Description for Competition 3',
-			organizer: 2,
+			user: 2,
 			dateStart: new Date('2025-03-01 00:00:00'),
 			dateEnd: new Date('2025-03-31 23:59:59'),
 			status: 3,
@@ -74,7 +80,9 @@ export class CompetitionService {
 		}
 	];
 
-	constructor(public call: CallService, public router: Router) { }
+	constructor(public call: CallService, public router: Router) {
+		this.competitionsSubject.next(this.compet.map(c => c.id));
+	}
 
 	add(): boolean {
 		try {
@@ -101,16 +109,19 @@ export class CompetitionService {
 			console.error("Error adding competition:", error);
 		}
 
-		this.competition.push({
+		this.compet.push({
+			id: this.competitionsSubject.getValue().length + 1,
 			name: this.name,
-			dateStart: this.dateStart,
-			dateEnd: this.dateEnd,
+			description: this.description,
+			dateStart: new Date(this.dateStart),
+			dateEnd: new Date(this.dateEnd),
 			user: this.user,
 			status: this.status,
-			location: this.location
+			location: this.location,
+			challenges: []
 		});
 
-		console.log("Competition added:", this.competition);
+		this.competitionsSubject.next(this.compet.map(c => c.id));
 
 		this.router.navigate(['/']);
 
@@ -118,23 +129,25 @@ export class CompetitionService {
 	}
 
 	delete(id: number): boolean {
-		try {
-			this.call.callApi("competition/delete", "delete", { "id": id + "" })
-			.subscribe(response => {
-				// return true;
-			}, error => {
-				console.error(error);
-
-				// return false;
-			});
-		} catch (error) {
-			console.error("Error deleting competition:", error);
-		}
-
 		if (confirm("Etes-vous sûr de vouloir supprimer cette compétition ?")) {
+			try {
+				this.call.callApi("competition/delete", "delete", { "id": id + "" })
+				.subscribe(response => {
+					// return true;
+				}, error => {
+					console.error(error);
+
+					// return false;
+				});
+			} catch (error) {
+				console.error("Error deleting competition:", error);
+			}
+
 			this.compet = this.compet.filter(c => c.id !== id);
 
 			console.log("Competition deleted:", id);
+
+			this.competitionsSubject.next(this.compet.map(c => c.id));
 
 			this.router.navigate(['/']);
 
@@ -177,6 +190,8 @@ export class CompetitionService {
 
 		console.log("Competition updated:", this.compet[index]);
 
+		this.competitionsSubject.next(this.compet.map(c => c.id));
+
 		this.router.navigate(["/"]);
 
 		return true;
@@ -196,7 +211,7 @@ export class CompetitionService {
 			console.error("Error fetching competitions:", error);
 		}
 
-		return this.compet.map(c => c.id);
+		return this.competitionsSubject.getValue();
 	}
 
 	getInfos(id: number): any {
@@ -217,7 +232,7 @@ export class CompetitionService {
 			id: 0,
 			name: "Compétition inconnue",
 			description: "Aucune description disponible",
-			organizer: 0,
+			user: 0,
 			dateStart: new Date(),
 			dateEnd: new Date(),
 			status: "Inconnu",

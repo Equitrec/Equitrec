@@ -129,20 +129,20 @@ export class UserService {
 	}
 
 	delete(id: number): boolean {
-		try {
-			this.call.callApi("user/delete/" + id, "delete", { })
-			.subscribe(response => {
-				// return true;
-			}, error => {
-				console.error(error);
-
-				// return false;
-			});
-		} catch (error) {
-			console.error("Error deleting user:", error);
-		}
-
 		if (confirm("Etes-vous sûr de vouloir supprimer cet utilisateur ?")) {
+			try {
+				this.call.callApi("user/delete/" + id, "delete", { })
+				.subscribe(response => {
+					// return true;
+				}, error => {
+					console.error(error);
+
+					// return false;
+				});
+			} catch (error) {
+				console.error("Error deleting user:", error);
+			}
+
 			this.users = this.users.filter(u => u.id !== id);
 
 			console.log("User deleted:", id);
