@@ -1,0 +1,13 @@
+<nav class="title_button_container">
+	<a class="button item" (click)="this.location.back()"><i class="ri-arrow-go-back-line"></i> Retour</a>
+</nav>
+
+<div class="tile user_container">
+	<h1>{{ this.userInfos.username }}</h1>
+
+	<app-qrcode
+		[username]="this.userInfos.username"
+		[password]="this.userInfos.password"
+		[token]="this.userInfos.token"
+	/>
+</div>

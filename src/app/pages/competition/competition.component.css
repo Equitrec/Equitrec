@@ -1,0 +1,36 @@
+.competition_container {
+	display: flex;
+	flex-direction: row;
+	gap: 40px;
+
+	.competition_details {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+
+		.challenges,
+		.users {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			gap: 20px;
+		}
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.competition_container {
+		flex-direction: column;
+
+		.competition_details {
+			justify-content: center;
+			align-items: center;
+
+			.challenges,
+			.users {
+				justify-content: center;
+				align-items: center;
+			}
+		}
+	}
+}

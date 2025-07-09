@@ -1,0 +1,37 @@
+<div class="tile competition_container">
+	<div class="title_blur_container"></div>
+	<img src="competition.png"/>
+	<i *ngIf="this.competitionInfos.id != competitionId" class="link ri-external-link-line"></i>
+	<h1>{{ this.competitionInfos.name }}</h1>
+
+	<div class="content_container">
+		<div class="content">
+			<label>Organisateur</label>
+			<p>{{ this.username }}</p>
+		</div>
+		<div class="content">
+			<label>Participants</label>
+			<p>{{ this.usersCount }}</p>
+		</div>
+		<div class="content">
+			<label>Début</label>
+			<p>{{ this.competitionInfos.dateStart | date:'dd/MM/yyyy HH:mm' }}</p>
+		</div>
+		<div class="content">
+			<label>Fin</label>
+			<p>{{ this.competitionInfos.dateEnd | date:'dd/MM/yyyy HH:mm'  }}</p>
+		</div>
+		<div class="content">
+			<label>État</label>
+			<p>{{ this.formatService.formatStatus(this.competitionInfos.status) }}</p>
+		</div>
+		<div class="content">
+			<label>Lieu</label>
+			<p>{{ this.competitionInfos.location }}</p>
+		</div>
+	</div>
+	<div class="action_button_container">
+        <a class="action_button" [routerLink]="['/edit/competition', this.competitionInfos.id]"><i class="ri-pencil-line"></i></a>
+        <a class="action_button" (click)="deleteCompetition($event, this.competitionInfos.id)"><i class="ri-delete-bin-line"></i></a>
+    </div>
+</div>

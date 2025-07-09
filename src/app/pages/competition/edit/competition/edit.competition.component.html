@@ -1,0 +1,13 @@
+<nav class="title_button_container">
+	<a class="button item" (click)="this.location.back()"><i class="ri-arrow-go-back-line"></i> Retour</a>
+</nav>
+
+<div class="tile form">
+	<h1>Modifier une compétition</h1>
+
+	<input type="text" [(ngModel)]="this.competionService.name" placeholder="Nom de la compétition"  />
+	<input type="datetime-local" [(ngModel)]="this.competionService.dateStart" placeholder="Date de début" />
+	<input type="datetime-local" [(ngModel)]="this.competionService.dateEnd" placeholder="Date de fin" />
+	<input type="text" [(ngModel)]="this.competionService.location" placeholder="Lieu de la compétition" />
+	<button (click)="this.competionService.update(this.competitionId)">Modifier</button>
+</div>

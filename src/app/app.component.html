@@ -1,1 +1,18 @@
-<h1>Equitrec</h1>
+<div class="title">
+	<a routerLink="/">
+		<img src="equitrec.png" />
+		<p>Equitrec</p>
+	</a>
+
+	<i class="ri-logout-box-r-line" (click)="this.userService.disconnect()"></i>
+</div>
+
+<div class="title_blur_container"></div>
+<section class="title_container">
+	<h1>{{ title }}</h1>
+	<h2>{{ subtitle }}</h2>
+</section>
+
+<section class="main">
+	<router-outlet />
+</section>

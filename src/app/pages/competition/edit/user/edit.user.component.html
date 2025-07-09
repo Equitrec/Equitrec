@@ -1,0 +1,16 @@
+<nav class="title_button_container">
+	<a class="button item" routerLink="/"><i class="ri-arrow-go-back-line"></i> Retour</a>
+</nav>
+
+<div class="tile form">
+	<h1>Modifier un utilisateur</h1>
+
+	<input type="text" [(ngModel)]="this.userService.username" placeholder="Identifiant" />
+	<select [(ngModel)]="this.userService.role">
+		<option value="1">Cavalier</option>
+		<option value="2">Juge</option>
+		<option value="10">Administrateur</option>
+	</select>
+
+	<button (click)="this.userService.update(this.userId)">Modifier</button>
+</div>

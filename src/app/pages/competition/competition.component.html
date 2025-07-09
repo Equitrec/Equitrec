@@ -1,0 +1,34 @@
+<nav class="title_button_container">
+	<a class="button item" routerLink="/"><i class="ri-arrow-go-back-line"></i> Retour</a>
+	<a class="button item" [routerLink]="['/create/challenge', this.competitionId]"><i class="ri-function-add-line"></i> Ajouter une épreuve</a>
+	<a class="button item" [routerLink]="['/create/user', this.competitionId]"><i class="ri-user-add-line"></i> Ajouter un participant</a>
+</nav>
+
+<div class="competition_container">
+	<tile-competition
+		[competition]="this.competitionId"
+	></tile-competition>
+
+	<div class="competition_details">
+		<h1>Participants</h1>
+		<div class="users">
+			<ng-container *ngFor="let userInfo of this.userInfos">
+				<a *ngIf="userInfo.role == 2" [routerLink]="['/users', userInfo.id]">
+					<tile-user [user]="userInfo"></tile-user>
+				</a>
+				<ng-container *ngIf="userInfo.role != 2">
+					<tile-user [user]="userInfo"></tile-user>
+				</ng-container>
+			</ng-container>
+		</div>
+
+		<h1>Epreuves</h1>
+		<div class="challenges">
+			<div *ngFor="let challengeInfo of this.challengeInfos">
+				<tile-challenge
+					[challenge]="challengeInfo"
+				></tile-challenge>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,24 @@
+.user_tile {
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	width: 300px;
+	position: relative;
+	padding-bottom: 30px;
+
+	.content {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		label {
+			font-size: 16px;
+			opacity: 70%;
+		}
+
+		p {
+			font-size: 18px;
+		}
+	}
+}

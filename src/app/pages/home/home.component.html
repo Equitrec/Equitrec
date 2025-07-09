@@ -1,0 +1,11 @@
+<nav class="title_button_container">
+	<a class="button item" routerLink="/create/competition"><i class="ri-add-circle-line"></i> Ajouter une compétition</a>
+</nav>
+
+<div class="competition_container">
+	<a *ngFor="let competitionId of this.competitions" [routerLink]="['/competition', competitionId]">
+		<tile-competition
+			[competition]="competitionId"
+		/>
+	</a>
+</div>

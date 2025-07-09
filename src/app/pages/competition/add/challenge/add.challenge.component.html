@@ -1,0 +1,19 @@
+<nav class="title_button_container">
+	<a class="button item" [routerLink]="['/competition', this.competitionId]"><i class="ri-arrow-go-back-line"></i> Retour</a>
+</nav>
+
+<div class="tile form">
+	<h1>Ajouter une épreuve</h1>
+
+	<input type="text" [(ngModel)]="this.challengeService.name" placeholder="Nom de la compétition" />
+	<textarea [(ngModel)]="this.challengeService.description" placeholder="Description de la compétition"></textarea>
+	<input type="text" [(ngModel)]="this.challengeService.tools" placeholder="Outils" />
+	<select [(ngModel)]="this.challengeService.level">
+		<option value="1">Débutant</option>
+		<option value="2">Intermédiaire</option>
+		<option value="3">Confirmé</option>
+		<option value="4">Expert</option>
+	</select>
+
+	<button (click)="this.challengeService.add(this.competitionId)">Créer la compétition</button>
+</div>
